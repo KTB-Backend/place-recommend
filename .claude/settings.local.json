@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/Owner/where-meeting/**)",
+      "Bash(wc -l data/processed/places.json)",
+      "Bash(powershell -Command \"\\(Get-Content 'data/processed/places.json' | Measure-Object -Line\\).Lines\")"
+    ]
+  }
+}
