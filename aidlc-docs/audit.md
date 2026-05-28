@@ -120,3 +120,42 @@
 
 ---
 
+## Unit 2 Construction - Functional Design Questions
+**Timestamp**: 2026-05-28T10:00:00Z
+**User Input**: "Unit 2 진행해 이때, 실제 좌표값으로 진행하는거야?"
+**AI Response**: Unit 2 Functional Design 시작. 실제 서울 지하철역 좌표 사용 확인. 설계 질문 2개 제시.
+**Context**: CONSTRUCTION - Unit 2 Functional Design
+
+---
+
+## Unit 2 Functional Design - User Answers
+**Timestamp**: 2026-05-28T10:01:00Z
+**User Input**: "A, A"
+**AI Response**: 역 목록 AI 선정(26개 주요역), 산술 평균 중간지점 채택. Functional Design 문서 생성.
+**Answers**:
+- Q1: A (AI가 26개 주요 역 선정 — 2·3·4·5·6·7·9호선 주요 환승역)
+- Q2: A (산술 평균, 서울 범위에서 오차 무시 가능)
+**Context**: CONSTRUCTION - Unit 2 Functional Design
+
+---
+
+## Unit 3 Construction - Functional Design Questions
+**Timestamp**: 2026-05-28T11:00:00Z
+**User Input**: "B" (Unit 2 승인, Unit 3 진행)
+**AI Response**: Unit 3 Functional Design 시작. 설계 질문 3개 제시.
+**Context**: CONSTRUCTION - Unit 3 Functional Design
+
+---
+
+## Unit 3 Functional Design - User Answers
+**Timestamp**: 2026-05-28T11:01:00Z
+**User Input**: "A, B, A"
+**AI Response**: 전체 필드 임베딩, 자유 텍스트 쿼리, 샘플 데이터 10개 포함 확정. Functional Design 문서 생성.
+**Answers**:
+- Q1: A (전체 필드: name + category + subcategory + tags + description)
+- Q2: B (자유 텍스트 쿼리)
+- Q3: A (샘플 데이터 10개 포함)
+**Context**: CONSTRUCTION - Unit 3 Functional Design
+
+---
+
