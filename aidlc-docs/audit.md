@@ -18,6 +18,65 @@
 
 ---
 
+## Unit 1 Code Generation - Started
+**Timestamp**: 2026-05-28T01:30:00Z
+**User Input**: "승인, Code Generation 진행해"
+**AI Response**: NFR Design 승인. Code Generation Part 1(계획) 시작.
+**Context**: CONSTRUCTION - Unit 1 Code Generation
+
+---
+
+## Unit 1 NFR Design - Completed
+**Timestamp**: 2026-05-28T01:25:00Z
+**User Input**: "A, B"
+**AI Response**: NFR Design 아티팩트 2종 생성 완료
+**Answers**: Q1=A(Annotated타입별칭), Q2=B(@composite전략)
+**Context**: CONSTRUCTION - Unit 1 NFR Design Complete
+
+---
+
+## Unit 1 NFR Design - Started
+**Timestamp**: 2026-05-28T01:20:00Z
+**User Input**: "승인, NFR Design 진행해"
+**AI Response**: NFR Requirements 승인. NFR Design 시작.
+**Context**: CONSTRUCTION - Unit 1 NFR Design
+
+---
+
+## Unit 1 NFR Requirements - Started
+**Timestamp**: 2026-05-28T01:10:00Z
+**User Input**: "승인, NFR Requirements 진행해"
+**AI Response**: Unit 1 Functional Design 승인. NFR Requirements 시작.
+**Context**: CONSTRUCTION - Unit 1 NFR Requirements
+
+---
+
+## Unit 1 Functional Design - Completed
+**Timestamp**: 2026-05-28T01:00:00Z
+**User Input**: "A, B, C"
+**AI Response**: Unit 1 Functional Design 아티팩트 3종 생성 완료
+**Answers**: Q1=A(list[str]), Q2=B(1-distance 유사도), Q3=C(radius_km+top_k 설정화)
+**Context**: CONSTRUCTION - Unit 1 Foundation Functional Design Complete
+
+---
+
+## Units Generation - Approved / Construction Phase Start
+**Timestamp**: 2026-05-28T00:50:00Z
+**User Input**: "승인, Construction Phase 진행해"
+**AI Response**: Units Generation 승인. Construction Phase Unit 1 Functional Design 시작.
+**Context**: INCEPTION → CONSTRUCTION PHASE 전환
+
+---
+
+## Units Generation - Completed
+**Timestamp**: 2026-05-28T00:45:00Z
+**User Input**: "B, A, A"
+**AI Response**: 4개 유닛 분해 완료. unit-of-work.md, unit-of-work-dependency.md, unit-of-work-story-map.md 생성.
+**Answers**: Q1=B(4개유닛), Q2=A(단위테스트후진행), Q3=A(RAG유닛포함)
+**Context**: INCEPTION - Units Generation Complete → Construction Phase 준비
+
+---
+
 ## Application Design - Completed
 **Timestamp**: 2026-05-28T00:30:00Z
 **User Input**: "답변 완료했어"
