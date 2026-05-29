@@ -29,3 +29,7 @@ data/raw/
 # OS
 .DS_Store
 Thumbs.db
+
+# Logs
+uvicorn_err.log
+uvicorn_out.log

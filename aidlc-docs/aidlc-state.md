@@ -41,8 +41,11 @@
 - [x] NFR Requirements (Unit 1: Foundation)
 - [x] NFR Design (Unit 1: Foundation)
 - [x] Infrastructure Design — SKIPPED
-- [ ] Code Generation
-- [ ] Build and Test
+- [x] Code Generation (Unit 1: Foundation)
+- [x] Code Generation (Unit 2: Location & Midpoint)
+- [x] Code Generation (Unit 3: RAG Engine)
+- [x] Code Generation (Unit 4: API & Integration)
+- [x] Build and Test
 
 ## Current Status
 - **Lifecycle Phase**: INCEPTION

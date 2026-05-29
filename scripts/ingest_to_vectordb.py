@@ -45,7 +45,7 @@ def main() -> None:
         documents=texts,
         metadatas=[_place_to_metadata(p) for p in places],
     )
-    print(f"✅ Ingested {len(places)} places into ChromaDB collection '{settings.chroma_collection_name}'")
+    print(f"[OK] Ingested {len(places)} places into ChromaDB collection '{settings.chroma_collection_name}'")
 
 
 if __name__ == "__main__":

@@ -56,10 +56,13 @@ class ChromaVectorRepository(VectorRepository):
         station_name: str,
         top_k: int,
     ) -> list[Recommendation]:
+        # n_results가 실제 매칭 문서 수를 초과하면 ChromaDB가 오류를 발생시키므로 clamp
         try:
+            count = self._collection.count()
+            n = max(1, min(top_k, count))
             results = self._collection.query(
                 query_embeddings=[query_embedding],
-                n_results=top_k,
+                n_results=n,
                 where={"station": station_name},
                 include=["metadatas", "distances"],
             )
