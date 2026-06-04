@@ -1,205 +1,198 @@
-# where 📍
+# mid-meet
 
-> RAG 기반 모임 장소 추천 서비스
-
-여러 사람의 출발 위치를 입력하면 지리적 중간지점을 계산하고, 근처 지하철역 주변의 장소를 AI 임베딩 검색으로 추천합니다.
-
----
+여러 사용자의 출발역을 입력받아 중간 지하철역을 계산하고, 그 주변에서 만남 장소를 추천하는 FastAPI 기반 백엔드입니다. 추천 데이터는 Kakao Local API로 수집한 장소 데이터를 기반으로 ChromaDB에 적재하고, SBERT 임베딩 검색으로 질의에 맞는 장소를 찾습니다.
 
 ## 주요 기능
 
-- **중간지점 계산** — 2명 이상의 출발 좌표에서 지리적 중간지점 산출
-- **RAG 장소 추천** — 중간지점 기준 최근접 역 탐색 → 한국어 벡터 검색으로 목적에 맞는 장소 추천
-- **확장 가능한 구조** — 카카오 Maps API, LLM 설명 생성, Qdrant 마이그레이션을 인터페이스 교체만으로 적용 가능
-
----
+- 출발역 이름 기반 중간역 계산
+- 좌표 기반 `/midpoint`, `/recommend` 요청도 하위 호환 지원
+- 추천 데이터가 있는 중간역이면 바로 장소 추천 반환
+- 중간역 주변에 추천 데이터가 없으면 가까운 후보역 3개를 사용자에게 선택지로 반환
+- 후보역이 마음에 들지 않을 때 기존 중간역 기준 Kakao Map 검색 링크 제공
+- 정적 프론트엔드 제공: `http://localhost:8000/`
 
 ## 기술 스택
 
-| 분류 | 기술 |
-|------|------|
-| API 서버 | FastAPI 0.115+, Uvicorn |
-| 임베딩 모델 | `jhgan/ko-sroberta-multitask` (한국어 특화 SBERT) |
-| 벡터 DB | ChromaDB (로컬 영구 저장) |
-| 데이터 검증 | Pydantic v2 |
-| 테스트 | pytest, Hypothesis (PBT) |
-| 언어 | Python 3.11+ |
+- Python 3.11+
+- FastAPI, Uvicorn
+- Pydantic v2, pydantic-settings
+- ChromaDB
+- sentence-transformers, Torch
+- Kakao Local API
+- pytest, Hypothesis, pytest-cov
+- Ruff, mypy
 
----
+## 디렉터리 구조
 
-## 아키텍처
-
-클린 아키텍처 4레이어로 구성합니다.
-
+```text
+domain/          도메인 모델, 예외, 포트 인터페이스
+application/     유스케이스 서비스
+infrastructure/  ChromaDB, SBERT, Kakao, 역 저장소 구현체
+api/             FastAPI 앱, 라우터, 스키마, 의존성 주입
+core/            환경 설정
+data/processed/  장소 데이터
+docs/            API 문서
+frontend/        정적 웹 화면
+scripts/         데이터 수집 및 벡터 DB 적재 스크립트
+tests/           단위, 통합, property-based 테스트
 ```
-domain/          ← 도메인 모델 + 인터페이스(포트)
-application/     ← 서비스 오케스트레이션
-infrastructure/  ← 인터페이스 구현체(어댑터)
-api/             ← FastAPI 진입점 + 의존성 주입
-```
-
-의존성 방향: `API → Application → Domain ← Infrastructure`
-
----
-
-## API
-
-### 중간지점 계산
-
-```
-POST /api/v1/midpoint
-```
-
-```json
-// Request
-{
-  "locations": [
-    {"lat": 37.5665, "lng": 126.9780},
-    {"lat": 37.5171, "lng": 127.0473}
-  ]
-}
-
-// Response
-{
-  "midpoint": {"lat": 37.5418, "lng": 127.0127},
-  "location_count": 2
-}
-```
-
-### 장소 추천
-
-```
-POST /api/v1/recommend
-```
-
-```json
-// Request
-{
-  "midpoint": {"lat": 37.5563, "lng": 126.9236},
-  "category": "데이트",
-  "radius_km": 5.0,
-  "top_k": 3
-}
-
-// Response
-{
-  "midpoint": {"lat": 37.5563, "lng": 126.9236},
-  "nearest_station": "홍대입구역 (2호선)",
-  "nearest_station_distance_m": 450.5,
-  "category": "데이트",
-  "results": [
-    {
-      "name": "라 파스타 홍대점",
-      "category": "레스토랑",
-      "subcategory": "이탈리안",
-      "address": "서울 마포구 어울마당로 123",
-      "station": "홍대입구",
-      "distance_from_station_m": 250,
-      "rating": 4.5,
-      "price_range": "중간",
-      "tags": ["데이트", "커플", "와인"],
-      "similarity_score": 0.12
-    }
-  ],
-  "total_found": 3
-}
-```
-
-### 헬스 체크
-
-```
-GET /health
-→ {"status": "ok"}
-```
-
----
 
 ## 로컬 실행
 
-### 1. 환경 설정
+### 1. 의존성 설치
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+.venv\Scripts\activate
+pip install -r requirements-dev.txt
 ```
+
+### 2. 환경 변수 설정
 
 ```bash
-cp .env.example .env
-# .env 파일에서 필요한 값 설정
+copy .env.example .env
 ```
 
-### 2. 벡터 DB 데이터 인제스트
+`.env`에 Kakao REST API 키를 설정합니다.
+
+```env
+KAKAO_REST_API_KEY=your_kakao_rest_api_key
+KAKAO_SSL_VERIFY=true
+```
+
+`.env`와 `data/chroma_db`는 커밋하지 않습니다.
+
+### 3. Kakao 장소 데이터 수집
+
+```bash
+python scripts/fetch_kakao_places.py
+```
+
+성공하면 `data/processed/places.json`이 갱신됩니다. Kakao API 제한이나 네트워크 오류가 발생하면 기존 `places.json`은 보존하고 `data/processed/places.partial.json`에 부분 결과만 저장합니다.
+
+이미 데이터가 있는 역을 반복 수집하지 않으려면 데이터가 0개인 역만 대상으로 실행합니다.
+
+```bash
+python scripts/fetch_kakao_places.py --missing-only
+```
+
+기본 실행은 `missing-first` 방식입니다. 현재 `places.json`을 읽어 데이터가 없는 역을 먼저 수집하고, Kakao에서 `API limit has been exceeded`가 반환되면 남은 호출을 즉시 중단합니다.
+
+현재 로컬 데이터 기준:
+
+- 장소 데이터: 2,296개
+- 데이터가 없는 역: 49개
+- 토큰 쿼터가 리셋된 뒤 `--missing-only`로 재수집
+
+### 4. 벡터 DB 적재
 
 ```bash
 python scripts/ingest_to_vectordb.py
 ```
 
-> 최초 실행 시 임베딩 모델 다운로드 (~400MB)
+최초 실행 시 SBERT 모델 다운로드가 발생할 수 있습니다.
 
-### 3. 서버 실행
+### 5. 서버 실행
 
 ```bash
 uvicorn api.main:app --reload --port 8000
 ```
 
-API 문서: http://localhost:8000/docs
+- 프론트엔드: `http://localhost:8000/`
+- Swagger UI: `http://localhost:8000/docs`
+- Health check: `http://localhost:8000/health`
 
----
+## API 예시
 
-## 테스트 실행
+자세한 내용은 [docs/API.md](docs/API.md)를 참고합니다.
+
+### 중간역 계산
+
+```http
+POST /api/v1/midpoint
+```
+
+```json
+{
+  "stations": ["서울역", "강남역"]
+}
+```
+
+### 장소 추천
+
+```http
+POST /api/v1/recommend
+```
+
+```json
+{
+  "stations": ["서울역", "강남역"],
+  "query": "조용한 카페",
+  "top_k": 3
+}
+```
+
+중간역 주변에 추천 데이터가 있으면 `status: "ok"`와 함께 추천 장소를 반환합니다.
+
+```json
+{
+  "status": "ok",
+  "meeting_station": {
+    "id": "gangnam",
+    "name": "강남역",
+    "lat": 37.4979,
+    "lng": 127.0276
+  },
+  "recommendations": []
+}
+```
+
+중간역 주변에 추천 데이터가 없으면 `status: "station_selection_required"`와 함께 선택 가능한 주변역과 Kakao Map 검색 링크를 반환합니다.
+
+```json
+{
+  "status": "station_selection_required",
+  "meeting_station": {
+    "id": "hangangjin",
+    "name": "한강진",
+    "lat": 37.5397,
+    "lng": 127.0019
+  },
+  "station_options": [],
+  "map_search": {
+    "provider": "kakao_map",
+    "label": "한강진 추천 카페 Kakao Map에서 보기",
+    "url": "https://map.kakao.com/?q=..."
+  }
+}
+```
+
+사용자가 후보역을 선택하면 `selected_station_id`를 포함해 다시 요청합니다.
+
+```json
+{
+  "stations": ["서울역", "강남역"],
+  "selected_station_id": "gangnam",
+  "query": "조용한 카페",
+  "top_k": 3
+}
+```
+
+## 검증 명령
 
 ```bash
-# 전체 테스트
 pytest
-
-# 단위 테스트만
-pytest tests/unit/
-
-# 통합 테스트만
-pytest tests/integration/
-
-# PBT (속성 기반 테스트)
-pytest tests/unit/properties/ -v
+ruff check .
+mypy .
 ```
 
----
+현재 프로젝트 설정상 `pytest`는 커버리지 80% 이상을 요구합니다. 실제 SBERT 모델 다운로드나 ChromaDB 영속 저장소 접근이 필요한 테스트는 기본 단위 테스트에 넣지 않는 것을 권장합니다.
 
-## 환경 변수
+## 개발 규칙
 
-| 변수 | 기본값 | 설명 |
-|------|--------|------|
-| `EMBEDDING_MODEL` | `jhgan/ko-sroberta-multitask` | 임베딩 모델 이름 |
-| `CHROMA_PERSIST_DIR` | `./data/chroma_db` | ChromaDB 저장 경로 |
-| `CHROMA_COLLECTION_NAME` | `places` | ChromaDB 컬렉션 이름 |
-| `APP_HOST` | `0.0.0.0` | 서버 호스트 |
-| `APP_PORT` | `8000` | 서버 포트 |
-
----
-
-## 프로젝트 구조
-
-```
-where/
-├── domain/              # 도메인 모델 + 인터페이스
-├── application/         # 비즈니스 서비스
-├── infrastructure/      # ChromaDB, SBERT, 역 데이터
-│   ├── embedding/
-│   ├── station/
-│   └── vector/
-├── api/                 # FastAPI 앱 + 라우터
-│   └── v1/
-├── core/                # 설정
-├── data/processed/      # 장소 JSON 데이터
-├── scripts/             # 데이터 인제스트 스크립트
-└── tests/               # 단위 + 통합 + PBT 테스트
-```
-
----
-
-## 로드맵
-
-- [x] Phase 1 — RAG 코어 파이프라인 (현재)
-- [ ] Phase 2 — 카카오 Maps API 연동 (실시간 역 탐색)
-- [ ] Phase 3 — LLM 연동 (Claude API — 추천 이유 생성)
-- [ ] Phase 4 — Qdrant 마이그레이션, Redis 캐싱, Docker 컨테이너화
+- `domain/`은 FastAPI, ChromaDB, Kakao 같은 외부 구현에 의존하지 않습니다.
+- 외부 연동은 `domain.interfaces`의 포트를 `infrastructure/`에서 구현합니다.
+- 비즈니스 로직은 `application/`에 두고 라우터에는 요청 변환과 서비스 호출만 둡니다.
+- API 스키마는 `api/v1/schemas.py`에 둡니다.
+- 환경 값은 `core.config.Settings`와 `.env.example`로 관리합니다.
+- 사용자에게 보이는 API 변경은 README 또는 `docs/API.md`도 함께 갱신합니다.

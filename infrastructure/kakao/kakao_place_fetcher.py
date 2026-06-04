@@ -83,10 +83,15 @@ class KakaoPlaceFetcher:
         self._request_interval_s = request_interval_s
         self._max_retries = max_retries
         self._failure_count = 0
+        self._quota_exceeded = False
 
     @property
     def failure_count(self) -> int:
         return self._failure_count
+
+    @property
+    def quota_exceeded(self) -> bool:
+        return self._quota_exceeded
 
     def close(self) -> None:
         self._client.close()
@@ -124,6 +129,8 @@ class KakaoPlaceFetcher:
         if isinstance(error, httpx.HTTPStatusError):
             status = f" status={error.response.status_code}"
             body = f" body={error.response.text[:300]}"
+            if "API limit has been exceeded" in error.response.text:
+                self._quota_exceeded = True
         self._failure_count += 1
         message = (
             f"[WARN] Kakao {source} failed station={station.name}"

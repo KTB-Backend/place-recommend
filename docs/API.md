@@ -1,9 +1,6 @@
 # API Guide
 
-This document describes the current HTTP API contract for the meeting-place
-recommendation service.
-
-Base URL for local development:
+Local base URL:
 
 ```text
 http://127.0.0.1:8000
@@ -15,20 +12,28 @@ Swagger UI:
 http://127.0.0.1:8000/docs
 ```
 
-## Midpoint Station
-
-Find the nearest station to the geographic midpoint of 2 to 10 input stations
-or coordinates.
+## Midpoint
 
 ```http
 POST /api/v1/midpoint
 ```
 
-Request:
+Station-name request:
 
 ```json
 {
   "stations": ["서울역", "강남역"]
+}
+```
+
+Legacy coordinate request:
+
+```json
+{
+  "locations": [
+    {"lat": 37.5665, "lng": 126.978},
+    {"lat": 37.4979, "lng": 127.0276}
+  ]
 }
 ```
 
@@ -39,17 +44,12 @@ Response:
   "id": "hangangjin",
   "name": "한강진",
   "line": "6호선",
-  "lat": 37.5299,
-  "lng": 126.9973
+  "lat": 37.5397,
+  "lng": 127.0019
 }
 ```
 
-## Recommend Places
-
-Recommend places near the midpoint station. If the midpoint station has no
-matching places in the local vector DB, the API returns nearby station options
-that already have recommendations. The client can then let the user choose one
-of those stations.
+## Recommend
 
 ```http
 POST /api/v1/recommend
@@ -67,16 +67,15 @@ Request:
 
 Fields:
 
-- `stations`: 2 to 10 station names. A trailing `역` suffix is optional.
-- `locations`: Optional legacy input, 2 to 10 coordinates.
+- `stations`: 2 to 10 station names. The trailing `역` suffix is optional.
+- `locations`: Legacy coordinate input. Use either `stations` or `locations`.
 - `query`: Natural-language place request.
-- `top_k`: Maximum recommendations per station, 1 to 20.
-- `selected_station_id`: Optional. Use this for the second request after the
-  user chooses one of the returned station options.
+- `top_k`: Number of recommendations per station, from 1 to 20.
+- `selected_station_id`: Optional. Use it after the user chooses a nearby station option.
 
 ### Direct Success
 
-Returned when the midpoint station has matching recommendations.
+Returned when the midpoint station has local recommendations.
 
 ```json
 {
@@ -95,35 +94,18 @@ Returned when the midpoint station has matching recommendations.
     "lat": 37.4979,
     "lng": 127.0276
   },
-  "recommendations": [
-    {
-      "place": {
-        "id": "kakao_123",
-        "name": "테스트 카페",
-        "description": "조용한 분위기의 카페",
-        "category": "카페",
-        "subcategory": "디저트카페",
-        "tags": ["조용한", "데이트"],
-        "station": "강남",
-        "exit_number": 1,
-        "distance_from_station_m": 200,
-        "address": "서울 강남구 테헤란로 1",
-        "lat": 37.498,
-        "lng": 127.028,
-        "rating": 0.0,
-        "price_range": "중간"
-      },
-      "similarity_score": 0.87
-    }
-  ]
+  "recommendations": []
 }
 ```
 
 ### Station Selection Required
 
-Returned when the midpoint station has no matching local DB recommendations.
-The response contains up to 3 nearby station options, and every option has at
-least one recommendation.
+Returned when the calculated midpoint station has no matching local DB data.
+The API returns:
+
+- the original `meeting_station`
+- up to 3 nearby station options that have recommendations
+- a Kakao Map search link for the original midpoint station
 
 ```json
 {
@@ -132,13 +114,14 @@ least one recommendation.
     "id": "hangangjin",
     "name": "한강진",
     "line": "6호선",
-    "lat": 37.5299,
-    "lng": 126.9973
+    "lat": 37.5397,
+    "lng": 127.0019
   },
   "map_search": {
-    "label": "카카오맵에서 한강진 조용한 카페 검색",
+    "provider": "kakao_map",
+    "label": "한강진 조용한 카페 Kakao Map에서 보기",
     "query": "한강진 조용한 카페",
-    "url": "https://map.kakao.com/link/search/%ED%95%9C%EA%B0%95%EC%A7%84%20%EC%A1%B0%EC%9A%A9%ED%95%9C%20%EC%B9%B4%ED%8E%98"
+    "url": "https://map.kakao.com/link/search/..."
   },
   "options": [
     {
@@ -149,41 +132,20 @@ least one recommendation.
         "lat": 37.544,
         "lng": 127.0182
       },
-      "recommendations": [
-        {
-          "place": {
-            "id": "kakao_456",
-            "name": "테스트 장소",
-            "description": "카카오 지도 데이터 기반 장소",
-            "category": "카페",
-            "subcategory": "카페",
-            "tags": ["카페"],
-            "station": "옥수",
-            "exit_number": 1,
-            "distance_from_station_m": 187,
-            "address": "서울 성동구",
-            "lat": 37.5442,
-            "lng": 127.0161,
-            "rating": 0.0,
-            "price_range": "중간"
-          },
-          "similarity_score": 0.45
-        }
-      ]
+      "recommendations": []
     }
   ]
 }
 ```
 
-Client behavior:
+Client flow:
 
-1. Show the original `meeting_station`.
-2. Show `options` as selectable nearby stations.
-3. Also show a button that opens `map_search.url` in Kakao Map.
-4. When the user selects an option, send a second `/recommend` request with
-   `selected_station_id`.
+1. Show that the current midpoint station has no local DB data.
+2. Show nearby selectable station options.
+3. Show the Kakao Map link for the original midpoint station.
+4. If the user selects an option, call `/api/v1/recommend` again with `selected_station_id`.
 
-Second request after user selection:
+Second request:
 
 ```json
 {
@@ -194,74 +156,58 @@ Second request after user selection:
 }
 ```
 
-Second response:
+## Kakao Data Collection
 
-```json
-{
-  "status": "ok",
-  "meeting_station": {
-    "id": "hangangjin",
-    "name": "한강진",
-    "line": "6호선",
-    "lat": 37.5299,
-    "lng": 126.9973
-  },
-  "station": {
-    "id": "oksu",
-    "name": "옥수",
-    "line": "3호선",
-    "lat": 37.544,
-    "lng": 127.0182
-  },
-  "recommendations": [
-    {
-      "place": {
-        "id": "kakao_456",
-        "name": "테스트 장소",
-        "description": "카카오 지도 데이터 기반 장소",
-        "category": "카페",
-        "subcategory": "카페",
-        "tags": ["카페"],
-        "station": "옥수",
-        "exit_number": 1,
-        "distance_from_station_m": 187,
-        "address": "서울 성동구",
-        "lat": 37.5442,
-        "lng": 127.0161,
-        "rating": 0.0,
-        "price_range": "중간"
-      },
-      "similarity_score": 0.45
-    }
-  ]
-}
+Full collection:
+
+```bash
+python scripts/fetch_kakao_places.py
 ```
 
-`recommendations` may contain fewer than `top_k` items when the station has
-limited data.
+Collect only stations that currently have no data:
+
+```bash
+python scripts/fetch_kakao_places.py --missing-only
+```
+
+The script reads `data/processed/places.json`, counts places per station, and
+uses that count to avoid wasting quota on already-populated stations.
+
+Default behavior is `missing-first`: stations with zero places are fetched
+before stations that already have data.
+
+When Kakao returns `API limit has been exceeded`, the script stops remaining
+calls immediately and writes the partial fetch result to:
+
+```text
+data/processed/places.partial.json
+```
+
+After a successful fetch or merge, re-ingest the vector DB:
+
+```bash
+python scripts/ingest_to_vectordb.py
+```
+
+Current local dataset status:
+
+- `data/processed/places.json`: 2,296 places
+- stations with zero local places: 49
+- use `--missing-only` after the Kakao quota resets
+
+Stations currently missing local place data:
+
+```text
+대청, 미아, 이촌, 영등포시장, 청구, 행당, 군자, 아차산, 광나루, 천호,
+강동, 망원, 상수, 이태원, 한강진, 녹사평, 보문, 안암, 고려대, 월곡,
+태릉입구, 뚝섬유원지, 청담, 강남구청, 학동, 논현, 반포, 내방, 남성,
+숭실대입구, 상도, 장승배기, 보라매, 신풍, 가산디지털단지, 흑석,
+구반포, 신반포, 사평, 신논현, 언주, 선정릉, 삼성중앙, 봉은사,
+한성백제, 올림픽공원, 디지털미디어시티, 종로3가, 종각
+```
 
 ## Error Responses
 
-Validation error:
-
-```text
-422 Unprocessable Entity
-```
-
-No nearby station:
-
-```text
-404 Not Found
-```
-
-No recommendations found for all candidate stations:
-
-```text
-404 Not Found
-```
-
-Vector DB error:
-
-```text
-503 Service Unavailable
-```
+- `422 Unprocessable Entity`: request validation failed
+- `404 Not Found`: no station or recommendations found
+- `503 Service Unavailable`: vector DB or embedding backend unavailable
