@@ -10,7 +10,9 @@ sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from core.config import get_settings
 from infrastructure.kakao.kakao_place_fetcher import KakaoPlaceFetcher
-from infrastructure.station.hardcoded_station_repository import HardcodedStationRepository
+from infrastructure.station.hardcoded_station_repository import (
+    HardcodedStationRepository,
+)
 
 
 def main() -> None:
@@ -56,6 +58,9 @@ def main() -> None:
             unique.append(p)
 
     out_path = Path("data/processed/places.json")
+    if fetcher.failure_count:
+        out_path = Path("data/processed/places.partial.json")
+
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(
         json.dumps([p.model_dump() for p in unique], ensure_ascii=False, indent=2),
@@ -63,9 +68,16 @@ def main() -> None:
     )
 
     print("-" * 50)
+    if fetcher.failure_count:
+        print(f"[ERROR] Kakao API 실패 {fetcher.failure_count}건 발생")
+        print(f"[WARN] 부분 수집 결과만 저장 → {out_path}")
+        print("[WARN] 기존 data/processed/places.json은 덮어쓰지 않았습니다.")
+        sys.exit(2)
+
     print(f"[OK] 총 {len(unique)}개 장소 저장 → {out_path}")
     if errors:
-        print(f"[WARN] 실패한 역 {len(errors)}개: {', '.join(e.split(':')[0] for e in errors)}")
+        failed_stations = ", ".join(e.split(":")[0] for e in errors)
+        print(f"[WARN] 실패한 역 {len(errors)}개: {failed_stations}")
     print()
     print("다음 단계: python scripts/ingest_to_vectordb.py")
 

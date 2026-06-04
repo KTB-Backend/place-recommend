@@ -1581,25 +1581,6 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_1171263054",
-    "name": "우미학 용산아이파크몰점",
-    "description": "우미학 용산아이파크몰점. 한식 업소. (카카오 지도 데이터)",
-    "category": "레스토랑",
-    "subcategory": "한식",
-    "tags": [
-      "음식점",
-      "한식"
-    ],
-    "station": "용산",
-    "exit_number": 1,
-    "distance_from_station_m": 19,
-    "address": "서울 용산구 한강대로23길 55",
-    "lat": 37.5297718014857,
-    "lng": 126.964741616619,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
     "id": "kakao_1371076620",
     "name": "쭈반 아이파크몰용산점",
     "description": "쭈반 아이파크몰용산점. 한식 업소. (카카오 지도 데이터)",
@@ -1615,6 +1596,67 @@
     "address": "서울 용산구 한강대로23길 55",
     "lat": 37.52977180147899,
     "lng": 126.9647416166194,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_349635529",
+    "name": "순대실록 용산아이파크몰점",
+    "description": "순대실록 용산아이파크몰점. 한식 > 순대 > 순대실록 업소. (카카오 지도 데이터)",
+    "category": "레스토랑",
+    "subcategory": "순대실록",
+    "tags": [
+      "음식점",
+      "한식",
+      "순대",
+      "순대실록"
+    ],
+    "station": "용산",
+    "exit_number": 1,
+    "distance_from_station_m": 19,
+    "address": "서울 용산구 한강대로23길 55",
+    "lat": 37.5297718014857,
+    "lng": 126.964741616619,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_1474046426",
+    "name": "아티제 용산아이파크몰점",
+    "description": "아티제 용산아이파크몰점. 간식 > 제과,베이커리 > 아티제 업소. (카카오 지도 데이터)",
+    "category": "레스토랑",
+    "subcategory": "아티제",
+    "tags": [
+      "음식점",
+      "간식",
+      "제과,베이커리",
+      "아티제"
+    ],
+    "station": "용산",
+    "exit_number": 1,
+    "distance_from_station_m": 19,
+    "address": "서울 용산구 한강대로23길 55",
+    "lat": 37.5297736038262,
+    "lng": 126.964742747116,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_1171263054",
+    "name": "우미학 용산아이파크몰점",
+    "description": "우미학 용산아이파크몰점. 한식 업소. (카카오 지도 데이터)",
+    "category": "레스토랑",
+    "subcategory": "한식",
+    "tags": [
+      "음식점",
+      "한식"
+    ],
+    "station": "용산",
+    "exit_number": 1,
+    "distance_from_station_m": 19,
+    "address": "서울 용산구 한강대로23길 55",
+    "lat": 37.5297718014857,
+    "lng": 126.964741616619,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -1654,27 +1696,6 @@
     "address": "서울 용산구 한강대로23길 55",
     "lat": 37.529771801479,
     "lng": 126.964741616619,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
-    "id": "kakao_1474046426",
-    "name": "아티제 용산아이파크몰점",
-    "description": "아티제 용산아이파크몰점. 간식 > 제과,베이커리 > 아티제 업소. (카카오 지도 데이터)",
-    "category": "레스토랑",
-    "subcategory": "아티제",
-    "tags": [
-      "음식점",
-      "간식",
-      "제과,베이커리",
-      "아티제"
-    ],
-    "station": "용산",
-    "exit_number": 1,
-    "distance_from_station_m": 19,
-    "address": "서울 용산구 한강대로23길 55",
-    "lat": 37.5297736038262,
-    "lng": 126.964742747116,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -1817,27 +1838,6 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_349635529",
-    "name": "순대실록 용산아이파크몰점",
-    "description": "순대실록 용산아이파크몰점. 한식 > 순대 > 순대실록 업소. (카카오 지도 데이터)",
-    "category": "레스토랑",
-    "subcategory": "순대실록",
-    "tags": [
-      "음식점",
-      "한식",
-      "순대",
-      "순대실록"
-    ],
-    "station": "용산",
-    "exit_number": 1,
-    "distance_from_station_m": 19,
-    "address": "서울 용산구 한강대로23길 55",
-    "lat": 37.5297718014857,
-    "lng": 126.964741616619,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
     "id": "kakao_1587996128",
     "name": "BBQ 용산아이파크몰점",
     "description": "BBQ 용산아이파크몰점. 치킨 > BBQ 업소. (카카오 지도 데이터)",
@@ -1877,21 +1877,22 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_846314097",
-    "name": "슈퍼말차 용산아이파크몰",
-    "description": "슈퍼말차 용산아이파크몰. 카페 업소. (카카오 지도 데이터)",
+    "id": "kakao_1735178333",
+    "name": "고카페 용산아이파크몰점",
+    "description": "고카페 용산아이파크몰점. 카페 > 커피전문점 업소. (카카오 지도 데이터)",
     "category": "카페",
-    "subcategory": "카페",
+    "subcategory": "커피전문점",
     "tags": [
       "음식점",
-      "카페"
+      "카페",
+      "커피전문점"
     ],
     "station": "용산",
     "exit_number": 1,
     "distance_from_station_m": 19,
     "address": "서울 용산구 한강대로23길 55",
-    "lat": 37.5297718014857,
-    "lng": 126.964741616619,
+    "lat": 37.5297736038262,
+    "lng": 126.964742747116,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -1933,26 +1934,6 @@
     "address": "서울 용산구 한강대로23길 55",
     "lat": 37.529771801479,
     "lng": 126.964741616619,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
-    "id": "kakao_1735178333",
-    "name": "고카페 용산아이파크몰점",
-    "description": "고카페 용산아이파크몰점. 카페 > 커피전문점 업소. (카카오 지도 데이터)",
-    "category": "카페",
-    "subcategory": "커피전문점",
-    "tags": [
-      "음식점",
-      "카페",
-      "커피전문점"
-    ],
-    "station": "용산",
-    "exit_number": 1,
-    "distance_from_station_m": 19,
-    "address": "서울 용산구 한강대로23길 55",
-    "lat": 37.5297736038262,
-    "lng": 126.964742747116,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -2036,6 +2017,25 @@
     "price_range": "중간"
   },
   {
+    "id": "kakao_846314097",
+    "name": "슈퍼말차 용산아이파크몰",
+    "description": "슈퍼말차 용산아이파크몰. 카페 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "카페",
+    "tags": [
+      "음식점",
+      "카페"
+    ],
+    "station": "용산",
+    "exit_number": 1,
+    "distance_from_station_m": 19,
+    "address": "서울 용산구 한강대로23길 55",
+    "lat": 37.5297718014857,
+    "lng": 126.964741616619,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
     "id": "kakao_628013416",
     "name": "스타벅스 용산이마트점",
     "description": "스타벅스 용산이마트점. 카페 > 커피전문점 > 스타벅스 업소. (카카오 지도 데이터)",
@@ -2053,25 +2053,6 @@
     "address": "서울 용산구 한강대로23길 55",
     "lat": 37.529771801479,
     "lng": 126.964741616619,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
-    "id": "kakao_2077211692",
-    "name": "파미고츄레리아 아이파크몰용산점",
-    "description": "파미고츄레리아 아이파크몰용산점. 카페 업소. (카카오 지도 데이터)",
-    "category": "카페",
-    "subcategory": "카페",
-    "tags": [
-      "음식점",
-      "카페"
-    ],
-    "station": "용산",
-    "exit_number": 1,
-    "distance_from_station_m": 20,
-    "address": "서울 용산구 한강대로23길 55",
-    "lat": 37.529762789776,
-    "lng": 126.964735964135,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -2148,6 +2129,25 @@
     "address": "서울 용산구 한강대로23길 55",
     "lat": 37.529762789776,
     "lng": 126.964735964135,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_97282632",
+    "name": "카페미뇽",
+    "description": "카페미뇽. 카페 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "카페",
+    "tags": [
+      "음식점",
+      "카페"
+    ],
+    "station": "용산",
+    "exit_number": 1,
+    "distance_from_station_m": 28,
+    "address": "서울 용산구 한강대로23길 55",
+    "lat": 37.5298933875845,
+    "lng": 126.964577514025,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -4461,26 +4461,6 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_1728710789",
-    "name": "그랜마파이",
-    "description": "그랜마파이. 양식 > 피자 업소. (카카오 지도 데이터)",
-    "category": "레스토랑",
-    "subcategory": "피자",
-    "tags": [
-      "음식점",
-      "양식",
-      "피자"
-    ],
-    "station": "신도림",
-    "exit_number": 1,
-    "distance_from_station_m": 64,
-    "address": "서울 구로구 새말로 지하 117-21",
-    "lat": 37.508770415592544,
-    "lng": 126.89108084029976,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
     "id": "kakao_1530015931",
     "name": "브레댄코 신도림역점",
     "description": "브레댄코 신도림역점. 간식 > 제과,베이커리 > 브레댄코 업소. (카카오 지도 데이터)",
@@ -4558,6 +4538,26 @@
     "address": "서울 구로구 새말로 지하 117-21",
     "lat": 37.508769515639266,
     "lng": 126.89108197263468,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_1728710789",
+    "name": "그랜마파이",
+    "description": "그랜마파이. 양식 > 피자 업소. (카카오 지도 데이터)",
+    "category": "레스토랑",
+    "subcategory": "피자",
+    "tags": [
+      "음식점",
+      "양식",
+      "피자"
+    ],
+    "station": "신도림",
+    "exit_number": 1,
+    "distance_from_station_m": 64,
+    "address": "서울 구로구 새말로 지하 117-21",
+    "lat": 37.508770415592544,
+    "lng": 126.89108084029976,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -4884,26 +4884,6 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_505334299",
-    "name": "바나프레소 이화여대점",
-    "description": "바나프레소 이화여대점. 카페 > 바나프레소 업소. (카카오 지도 데이터)",
-    "category": "카페",
-    "subcategory": "바나프레소",
-    "tags": [
-      "음식점",
-      "카페",
-      "바나프레소"
-    ],
-    "station": "신도림",
-    "exit_number": 1,
-    "distance_from_station_m": 154,
-    "address": "서울 구로구 새말로 97",
-    "lat": 37.5070442017747,
-    "lng": 126.890227179901,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
     "id": "kakao_345697415",
     "name": "컴포즈커피 신도림역사점",
     "description": "컴포즈커피 신도림역사점. 카페 > 커피전문점 > 컴포즈커피 업소. (카카오 지도 데이터)",
@@ -5042,6 +5022,27 @@
     "address": "서울 구로구 새말로 97",
     "lat": 37.50662467833042,
     "lng": 126.89059876075298,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_1395449447",
+    "name": "몬스터파크 신도림점",
+    "description": "몬스터파크 신도림점. 유아 > 놀이시설 > 키즈카페 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "키즈카페",
+    "tags": [
+      "가정,생활",
+      "유아",
+      "놀이시설",
+      "키즈카페"
+    ],
+    "station": "신도림",
+    "exit_number": 1,
+    "distance_from_station_m": 292,
+    "address": "서울 구로구 경인로 661",
+    "lat": 37.509756435551566,
+    "lng": 126.88852777493138,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -5777,6 +5778,26 @@
     "price_range": "중간"
   },
   {
+    "id": "kakao_1310418348",
+    "name": "공차 NC구로점",
+    "description": "공차 NC구로점. 카페 > 공차 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "공차",
+    "tags": [
+      "음식점",
+      "카페",
+      "공차"
+    ],
+    "station": "구로",
+    "exit_number": 1,
+    "distance_from_station_m": 201,
+    "address": "서울 구로구 구로중앙로 152",
+    "lat": 37.5011588838246,
+    "lng": 126.882774031717,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
     "id": "kakao_118057086",
     "name": "더카페 NC신구로점",
     "description": "더카페 NC신구로점. 카페 > 커피전문점 > 더카페 업소. (카카오 지도 데이터)",
@@ -5794,26 +5815,6 @@
     "address": "서울 구로구 구로중앙로 152",
     "lat": 37.5011597836993,
     "lng": 126.882772899398,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
-    "id": "kakao_1310418348",
-    "name": "공차 NC구로점",
-    "description": "공차 NC구로점. 카페 > 공차 업소. (카카오 지도 데이터)",
-    "category": "카페",
-    "subcategory": "공차",
-    "tags": [
-      "음식점",
-      "카페",
-      "공차"
-    ],
-    "station": "구로",
-    "exit_number": 1,
-    "distance_from_station_m": 201,
-    "address": "서울 구로구 구로중앙로 152",
-    "lat": 37.5011588838246,
-    "lng": 126.882774031717,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -6459,12 +6460,14 @@
   {
     "id": "kakao_1414931109",
     "name": "컴포즈커피 신대방역점",
-    "description": "컴포즈커피 신대방역점. 카페 업소. (카카오 지도 데이터)",
+    "description": "컴포즈커피 신대방역점. 카페 > 커피전문점 > 컴포즈커피 업소. (카카오 지도 데이터)",
     "category": "카페",
-    "subcategory": "카페",
+    "subcategory": "컴포즈커피",
     "tags": [
       "음식점",
-      "카페"
+      "카페",
+      "커피전문점",
+      "컴포즈커피"
     ],
     "station": "신대방",
     "exit_number": 1,
@@ -9258,25 +9261,6 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_1203851166",
-    "name": "계혁명옛날통닭 시립대점",
-    "description": "계혁명옛날통닭 시립대점. 치킨 업소. (카카오 지도 데이터)",
-    "category": "레스토랑",
-    "subcategory": "치킨",
-    "tags": [
-      "음식점",
-      "치킨"
-    ],
-    "station": "회기",
-    "exit_number": 1,
-    "distance_from_station_m": 46,
-    "address": "서울 동대문구 망우로16길 26",
-    "lat": 37.58900450319007,
-    "lng": 127.06111159945932,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
     "id": "kakao_618980880",
     "name": "대박식당",
     "description": "대박식당. 한식 업소. (카카오 지도 데이터)",
@@ -9292,6 +9276,25 @@
     "address": "서울 동대문구 망우로16길 26",
     "lat": 37.5890045031901,
     "lng": 127.061111599459,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_1203851166",
+    "name": "계혁명옛날통닭 시립대점",
+    "description": "계혁명옛날통닭 시립대점. 치킨 업소. (카카오 지도 데이터)",
+    "category": "레스토랑",
+    "subcategory": "치킨",
+    "tags": [
+      "음식점",
+      "치킨"
+    ],
+    "station": "회기",
+    "exit_number": 1,
+    "distance_from_station_m": 46,
+    "address": "서울 동대문구 망우로16길 26",
+    "lat": 37.58900450319007,
+    "lng": 127.06111159945932,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -11664,8 +11667,8 @@
   },
   {
     "id": "kakao_742951457",
-    "name": "차지 시청점",
-    "description": "차지 시청점. 카페 업소. (카카오 지도 데이터)",
+    "name": "차지 시청역점",
+    "description": "차지 시청역점. 카페 업소. (카카오 지도 데이터)",
     "category": "카페",
     "subcategory": "카페",
     "tags": [
@@ -12638,25 +12641,6 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_21409555",
-    "name": "어컵오브",
-    "description": "어컵오브. 카페 업소. (카카오 지도 데이터)",
-    "category": "카페",
-    "subcategory": "카페",
-    "tags": [
-      "음식점",
-      "카페"
-    ],
-    "station": "을지로입구",
-    "exit_number": 1,
-    "distance_from_station_m": 114,
-    "address": "서울 중구 을지로 54-1",
-    "lat": 37.5659114169917,
-    "lng": 126.98384111160425,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
     "id": "kakao_1417810264",
     "name": "로스터리요정",
     "description": "로스터리요정. 카페 > 커피전문점 업소. (카카오 지도 데이터)",
@@ -12673,6 +12657,25 @@
     "address": "서울 중구 을지로 54-1",
     "lat": 37.5659123178328,
     "lng": 126.983839979518,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_21409555",
+    "name": "어컵오브",
+    "description": "어컵오브. 카페 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "카페",
+    "tags": [
+      "음식점",
+      "카페"
+    ],
+    "station": "을지로입구",
+    "exit_number": 1,
+    "distance_from_station_m": 114,
+    "address": "서울 중구 을지로 54-1",
+    "lat": 37.5659114169917,
+    "lng": 126.98384111160425,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -12917,26 +12920,6 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_10582837",
-    "name": "안동장",
-    "description": "안동장. 중식 > 중국요리 업소. (카카오 지도 데이터)",
-    "category": "레스토랑",
-    "subcategory": "중국요리",
-    "tags": [
-      "음식점",
-      "중식",
-      "중국요리"
-    ],
-    "station": "을지로3가",
-    "exit_number": 1,
-    "distance_from_station_m": 24,
-    "address": "서울 중구 을지로 124",
-    "lat": 37.5660852137074,
-    "lng": 126.99157870487,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
     "id": "kakao_999357347",
     "name": "친앤노즈",
     "description": "친앤노즈. 술집 > 와인바 업소. (카카오 지도 데이터)",
@@ -12953,6 +12936,26 @@
     "address": "서울 중구 을지로 122",
     "lat": 37.5661167397846,
     "lng": 126.991456456663,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_10582837",
+    "name": "안동장",
+    "description": "안동장. 중식 > 중국요리 업소. (카카오 지도 데이터)",
+    "category": "레스토랑",
+    "subcategory": "중국요리",
+    "tags": [
+      "음식점",
+      "중식",
+      "중국요리"
+    ],
+    "station": "을지로3가",
+    "exit_number": 1,
+    "distance_from_station_m": 24,
+    "address": "서울 중구 을지로 124",
+    "lat": 37.5660852137074,
+    "lng": 126.99157870487,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -13175,25 +13178,6 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_1492690906",
-    "name": "사랑평화지구",
-    "description": "사랑평화지구. 술집 업소. (카카오 지도 데이터)",
-    "category": "레스토랑",
-    "subcategory": "술집",
-    "tags": [
-      "음식점",
-      "술집"
-    ],
-    "station": "을지로3가",
-    "exit_number": 1,
-    "distance_from_station_m": 68,
-    "address": "서울 중구 을지로 130-1",
-    "lat": 37.5661879805179,
-    "lng": 126.992361965375,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
     "id": "kakao_2146320195",
     "name": "박만배아리랑보쌈 을지로점",
     "description": "박만배아리랑보쌈 을지로점. 한식 > 육류,고기 > 족발,보쌈 업소. (카카오 지도 데이터)",
@@ -13211,6 +13195,25 @@
     "address": "서울 중구 을지로 130-1",
     "lat": 37.56618798051788,
     "lng": 126.99236196537467,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_1492690906",
+    "name": "사랑평화지구",
+    "description": "사랑평화지구. 술집 업소. (카카오 지도 데이터)",
+    "category": "레스토랑",
+    "subcategory": "술집",
+    "tags": [
+      "음식점",
+      "술집"
+    ],
+    "station": "을지로3가",
+    "exit_number": 1,
+    "distance_from_station_m": 68,
+    "address": "서울 중구 을지로 130-1",
+    "lat": 37.5661879805179,
+    "lng": 126.992361965375,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -16010,6 +16013,26 @@
     "price_range": "중간"
   },
   {
+    "id": "kakao_341654063",
+    "name": "앤드케이크",
+    "description": "앤드케이크. 간식 > 제과,베이커리 업소. (카카오 지도 데이터)",
+    "category": "레스토랑",
+    "subcategory": "제과,베이커리",
+    "tags": [
+      "음식점",
+      "간식",
+      "제과,베이커리"
+    ],
+    "station": "상왕십리",
+    "exit_number": 1,
+    "distance_from_station_m": 117,
+    "address": "서울 성동구 무학봉21길 9",
+    "lat": 37.5622720556361,
+    "lng": 127.030909331235,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
     "id": "kakao_1044363502",
     "name": "버텍스미국식덮밥 왕십리점",
     "description": "버텍스미국식덮밥 왕십리점. 양식 업소. (카카오 지도 데이터)",
@@ -16129,26 +16152,6 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_10885340",
-    "name": "페리카나 왕십리점",
-    "description": "페리카나 왕십리점. 치킨 > 페리카나 업소. (카카오 지도 데이터)",
-    "category": "레스토랑",
-    "subcategory": "페리카나",
-    "tags": [
-      "음식점",
-      "치킨",
-      "페리카나"
-    ],
-    "station": "상왕십리",
-    "exit_number": 1,
-    "distance_from_station_m": 136,
-    "address": "서울 성동구 무학봉15길 23",
-    "lat": 37.5631731968119,
-    "lng": 127.030351701284,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
     "id": "kakao_1285252800",
     "name": "바코드커피",
     "description": "바코드커피. 카페 업소. (카카오 지도 데이터)",
@@ -16164,25 +16167,6 @@
     "address": "서울 성동구 무학봉15다길 4",
     "lat": 37.56230819240105,
     "lng": 127.03053697168629,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
-    "id": "kakao_821571185",
-    "name": "로뎀나무커피",
-    "description": "로뎀나무커피. 카페 업소. (카카오 지도 데이터)",
-    "category": "카페",
-    "subcategory": "카페",
-    "tags": [
-      "음식점",
-      "카페"
-    ],
-    "station": "상왕십리",
-    "exit_number": 1,
-    "distance_from_station_m": 116,
-    "address": "서울 성동구 무학봉15길 8",
-    "lat": 37.5618449921845,
-    "lng": 127.030875199894,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -16344,6 +16328,25 @@
     "address": "서울 성동구 왕십리로 357",
     "lat": 37.563785884750935,
     "lng": 127.03031120290173,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_640280296",
+    "name": "노워리즈(NWRS)",
+    "description": "노워리즈(NWRS). 카페 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "카페",
+    "tags": [
+      "음식점",
+      "카페"
+    ],
+    "station": "상왕십리",
+    "exit_number": 1,
+    "distance_from_station_m": 207,
+    "address": "서울 성동구 왕십리로31길 9-36",
+    "lat": 37.563544964844965,
+    "lng": 127.02809945859741,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -16511,25 +16514,6 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_1476468132",
-    "name": "킹스홀덤펍",
-    "description": "킹스홀덤펍. 술집 업소. (카카오 지도 데이터)",
-    "category": "술집",
-    "subcategory": "술집",
-    "tags": [
-      "음식점",
-      "술집"
-    ],
-    "station": "상왕십리",
-    "exit_number": 1,
-    "distance_from_station_m": 250,
-    "address": "서울 성동구 왕십리로 348",
-    "lat": 37.563688238228,
-    "lng": 127.031603745402,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
     "id": "kakao_19034686",
     "name": "마시자호프",
     "description": "마시자호프. 술집 업소. (카카오 지도 데이터)",
@@ -16610,6 +16594,27 @@
     "price_range": "중간"
   },
   {
+    "id": "kakao_26619877",
+    "name": "봉구비어 왕십리역점",
+    "description": "봉구비어 왕십리역점. 술집 > 호프,요리주점 > 봉구비어 업소. (카카오 지도 데이터)",
+    "category": "술집",
+    "subcategory": "봉구비어",
+    "tags": [
+      "음식점",
+      "술집",
+      "호프,요리주점",
+      "봉구비어"
+    ],
+    "station": "상왕십리",
+    "exit_number": 1,
+    "distance_from_station_m": 283,
+    "address": "서울 성동구 무학봉26길 10",
+    "lat": 37.5616228416963,
+    "lng": 127.032750545476,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
     "id": "kakao_1927261356",
     "name": "더베이크 왕십리역점",
     "description": "더베이크 왕십리역점. 간식 > 제과,베이커리 업소. (카카오 지도 데이터)",
@@ -16670,21 +16675,101 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_69842167",
-    "name": "매란방",
-    "description": "매란방. 중식 업소. (카카오 지도 데이터)",
+    "id": "kakao_1942869322",
+    "name": "아웃백스테이크하우스 왕십리역사점",
+    "description": "아웃백스테이크하우스 왕십리역사점. 패밀리레스토랑 > 아웃백스테이크하우스딜리버리 업소. (카카오 지도 데이터)",
     "category": "레스토랑",
-    "subcategory": "중식",
+    "subcategory": "아웃백스테이크하우스딜리버리",
     "tags": [
       "음식점",
-      "중식"
+      "패밀리레스토랑",
+      "아웃백스테이크하우스딜리버리"
     ],
     "station": "왕십리",
     "exit_number": 1,
     "distance_from_station_m": 17,
     "address": "서울 성동구 왕십리광장로 17",
-    "lat": 37.56144184311158,
-    "lng": 127.03839374171214,
+    "lat": 37.5614409413851,
+    "lng": 127.038396004898,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_552954096",
+    "name": "봄이보리밥 왕십리역점",
+    "description": "봄이보리밥 왕십리역점. 한식 > 봄이보리밥 업소. (카카오 지도 데이터)",
+    "category": "레스토랑",
+    "subcategory": "봄이보리밥",
+    "tags": [
+      "음식점",
+      "한식",
+      "봄이보리밥"
+    ],
+    "station": "왕십리",
+    "exit_number": 1,
+    "distance_from_station_m": 17,
+    "address": "서울 성동구 왕십리광장로 17",
+    "lat": 37.5614418431116,
+    "lng": 127.038393741712,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_1104894129",
+    "name": "반궁 왕십리역사점",
+    "description": "반궁 왕십리역사점. 한식 업소. (카카오 지도 데이터)",
+    "category": "레스토랑",
+    "subcategory": "한식",
+    "tags": [
+      "음식점",
+      "한식"
+    ],
+    "station": "왕십리",
+    "exit_number": 1,
+    "distance_from_station_m": 17,
+    "address": "서울 성동구 왕십리광장로 17",
+    "lat": 37.5614418431116,
+    "lng": 127.038393741712,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_1567325159",
+    "name": "채선당자연한가득 왕십리역점",
+    "description": "채선당자연한가득 왕십리역점. 샤브샤브 > 채선당 > 채선당자연한가득 업소. (카카오 지도 데이터)",
+    "category": "레스토랑",
+    "subcategory": "채선당자연한가득",
+    "tags": [
+      "음식점",
+      "샤브샤브",
+      "채선당",
+      "채선당자연한가득"
+    ],
+    "station": "왕십리",
+    "exit_number": 1,
+    "distance_from_station_m": 17,
+    "address": "서울 성동구 왕십리광장로 17",
+    "lat": 37.5614418431178,
+    "lng": 127.03839374171238,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_980161810",
+    "name": "미도인 왕십리역사",
+    "description": "미도인 왕십리역사. 퓨전요리 업소. (카카오 지도 데이터)",
+    "category": "레스토랑",
+    "subcategory": "퓨전요리",
+    "tags": [
+      "음식점",
+      "퓨전요리"
+    ],
+    "station": "왕십리",
+    "exit_number": 1,
+    "distance_from_station_m": 17,
+    "address": "서울 성동구 왕십리광장로 17",
+    "lat": 37.5614418431178,
+    "lng": 127.038393741712,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -16704,6 +16789,25 @@
     "address": "서울 성동구 왕십리광장로 17",
     "lat": 37.5614418431178,
     "lng": 127.038393741712,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_69842167",
+    "name": "매란방",
+    "description": "매란방. 중식 업소. (카카오 지도 데이터)",
+    "category": "레스토랑",
+    "subcategory": "중식",
+    "tags": [
+      "음식점",
+      "중식"
+    ],
+    "station": "왕십리",
+    "exit_number": 1,
+    "distance_from_station_m": 17,
+    "address": "서울 성동구 왕십리광장로 17",
+    "lat": 37.56144184311158,
+    "lng": 127.03839374171214,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -16806,105 +16910,6 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_39292562",
-    "name": "반포식스 왕십리역사점",
-    "description": "반포식스 왕십리역사점. 음식점 업소. (카카오 지도 데이터)",
-    "category": "레스토랑",
-    "subcategory": "레스토랑",
-    "tags": [
-      "음식점",
-      "레스토랑"
-    ],
-    "station": "왕십리",
-    "exit_number": 1,
-    "distance_from_station_m": 17,
-    "address": "서울 성동구 왕십리광장로 17",
-    "lat": 37.5614418431116,
-    "lng": 127.038393741712,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
-    "id": "kakao_562830100",
-    "name": "청기와타운 왕십리점",
-    "description": "청기와타운 왕십리점. 한식 > 육류,고기 업소. (카카오 지도 데이터)",
-    "category": "레스토랑",
-    "subcategory": "육류,고기",
-    "tags": [
-      "음식점",
-      "한식",
-      "육류,고기"
-    ],
-    "station": "왕십리",
-    "exit_number": 1,
-    "distance_from_station_m": 17,
-    "address": "서울 성동구 왕십리광장로 17",
-    "lat": 37.5614418431178,
-    "lng": 127.038393741712,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
-    "id": "kakao_210864657",
-    "name": "와플샵 왕십리역사점",
-    "description": "와플샵 왕십리역사점. 간식 > 제과,베이커리 업소. (카카오 지도 데이터)",
-    "category": "레스토랑",
-    "subcategory": "제과,베이커리",
-    "tags": [
-      "음식점",
-      "간식",
-      "제과,베이커리"
-    ],
-    "station": "왕십리",
-    "exit_number": 1,
-    "distance_from_station_m": 17,
-    "address": "서울 성동구 왕십리광장로 17",
-    "lat": 37.5614418431178,
-    "lng": 127.038393741712,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
-    "id": "kakao_550825779",
-    "name": "명인만두 왕십리역점",
-    "description": "명인만두 왕십리역점. 분식 > 명인만두 업소. (카카오 지도 데이터)",
-    "category": "레스토랑",
-    "subcategory": "명인만두",
-    "tags": [
-      "음식점",
-      "분식",
-      "명인만두"
-    ],
-    "station": "왕십리",
-    "exit_number": 1,
-    "distance_from_station_m": 17,
-    "address": "서울 성동구 왕십리광장로 17",
-    "lat": 37.5614418431178,
-    "lng": 127.038393741712,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
-    "id": "kakao_1312334957",
-    "name": "모닥스낵",
-    "description": "모닥스낵. 분식 > 떡볶이 업소. (카카오 지도 데이터)",
-    "category": "레스토랑",
-    "subcategory": "떡볶이",
-    "tags": [
-      "음식점",
-      "분식",
-      "떡볶이"
-    ],
-    "station": "왕십리",
-    "exit_number": 1,
-    "distance_from_station_m": 17,
-    "address": "서울 성동구 왕십리광장로 17",
-    "lat": 37.5614418431116,
-    "lng": 127.038393741712,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
     "id": "kakao_526915506",
     "name": "라떼킹 왕십리역점",
     "description": "라떼킹 왕십리역점. 카페 업소. (카카오 지도 데이터)",
@@ -16924,9 +16929,9 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_1199235404",
-    "name": "망고당",
-    "description": "망고당. 카페 업소. (카카오 지도 데이터)",
+    "id": "kakao_2142832719",
+    "name": "콜렉티보 왕십리역점",
+    "description": "콜렉티보 왕십리역점. 카페 업소. (카카오 지도 데이터)",
     "category": "카페",
     "subcategory": "카페",
     "tags": [
@@ -16943,9 +16948,9 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_2142832719",
-    "name": "콜렉티보 왕십리역점",
-    "description": "콜렉티보 왕십리역점. 카페 업소. (카카오 지도 데이터)",
+    "id": "kakao_1199235404",
+    "name": "망고당",
+    "description": "망고당. 카페 업소. (카카오 지도 데이터)",
     "category": "카페",
     "subcategory": "카페",
     "tags": [
@@ -21804,6 +21809,27 @@
     "price_range": "중간"
   },
   {
+    "id": "kakao_1674086114",
+    "name": "화이트리에 잠실새내점",
+    "description": "화이트리에 잠실새내점. 간식 > 제과,베이커리 > 화이트리에 업소. (카카오 지도 데이터)",
+    "category": "레스토랑",
+    "subcategory": "화이트리에",
+    "tags": [
+      "음식점",
+      "간식",
+      "제과,베이커리",
+      "화이트리에"
+    ],
+    "station": "잠실나루",
+    "exit_number": 1,
+    "distance_from_station_m": 188,
+    "address": "서울 송파구 올림픽로 145",
+    "lat": 37.511980820328496,
+    "lng": 127.08704201836383,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
     "id": "kakao_1661248711",
     "name": "라치오파스타",
     "description": "라치오파스타. 양식 > 이탈리안 업소. (카카오 지도 데이터)",
@@ -21898,27 +21924,6 @@
     "address": "서울 송파구 올림픽로 145",
     "lat": 37.511980820335445,
     "lng": 127.08704201836436,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
-    "id": "kakao_1674086114",
-    "name": "화이트리에 잠실새내점",
-    "description": "화이트리에 잠실새내점. 간식 > 제과,베이커리 > 화이트리에 업소. (카카오 지도 데이터)",
-    "category": "레스토랑",
-    "subcategory": "화이트리에",
-    "tags": [
-      "음식점",
-      "간식",
-      "제과,베이커리",
-      "화이트리에"
-    ],
-    "station": "잠실나루",
-    "exit_number": 1,
-    "distance_from_station_m": 188,
-    "address": "서울 송파구 올림픽로 145",
-    "lat": 37.511980820328496,
-    "lng": 127.08704201836383,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -22595,25 +22600,6 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_1020017733",
-    "name": "만쥬벌판",
-    "description": "만쥬벌판. 분식 업소. (카카오 지도 데이터)",
-    "category": "레스토랑",
-    "subcategory": "분식",
-    "tags": [
-      "음식점",
-      "분식"
-    ],
-    "station": "잠실",
-    "exit_number": 1,
-    "distance_from_station_m": 44,
-    "address": "서울 송파구 올림픽로 지하 265",
-    "lat": 37.5131457766772,
-    "lng": 127.099636973436,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
     "id": "kakao_1846261948",
     "name": "본설렁탕 잠실역지하상가점",
     "description": "본설렁탕 잠실역지하상가점. 한식 > 설렁탕 업소. (카카오 지도 데이터)",
@@ -22729,6 +22715,26 @@
     "address": "서울 송파구 올림픽로 269",
     "lat": 37.51419467607328,
     "lng": 127.10054551800373,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_1662289422",
+    "name": "매드포갈릭 롯데캐슬잠실점",
+    "description": "매드포갈릭 롯데캐슬잠실점. 패밀리레스토랑 > 매드포갈릭 업소. (카카오 지도 데이터)",
+    "category": "레스토랑",
+    "subcategory": "매드포갈릭",
+    "tags": [
+      "음식점",
+      "패밀리레스토랑",
+      "매드포갈릭"
+    ],
+    "station": "잠실",
+    "exit_number": 1,
+    "distance_from_station_m": 109,
+    "address": "서울 송파구 올림픽로 269",
+    "lat": 37.51427419890255,
+    "lng": 127.10026963357568,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -26025,26 +26031,6 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_716549653",
-    "name": "후라토식당 GFC역삼직영점",
-    "description": "후라토식당 GFC역삼직영점. 일식 > 후라토식당 업소. (카카오 지도 데이터)",
-    "category": "레스토랑",
-    "subcategory": "후라토식당",
-    "tags": [
-      "음식점",
-      "일식",
-      "후라토식당"
-    ],
-    "station": "역삼",
-    "exit_number": 1,
-    "distance_from_station_m": 8,
-    "address": "서울 강남구 테헤란로 152",
-    "lat": 37.5000238801213,
-    "lng": 127.036508733456,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
     "id": "kakao_1050527540",
     "name": "고우가 역삼역점",
     "description": "고우가 역삼역점. 한식 > 육류,고기 업소. (카카오 지도 데이터)",
@@ -26145,6 +26131,26 @@
     "price_range": "중간"
   },
   {
+    "id": "kakao_716549653",
+    "name": "후라토식당 GFC역삼직영점",
+    "description": "후라토식당 GFC역삼직영점. 일식 > 후라토식당 업소. (카카오 지도 데이터)",
+    "category": "레스토랑",
+    "subcategory": "후라토식당",
+    "tags": [
+      "음식점",
+      "일식",
+      "후라토식당"
+    ],
+    "station": "역삼",
+    "exit_number": 1,
+    "distance_from_station_m": 8,
+    "address": "서울 강남구 테헤란로 152",
+    "lat": 37.5000238801213,
+    "lng": 127.036508733456,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
     "id": "kakao_27226411",
     "name": "스노우폭스 역삼파이낸스점",
     "description": "스노우폭스 역삼파이낸스점. 도시락 업소. (카카오 지도 데이터)",
@@ -26226,6 +26232,25 @@
     "price_range": "중간"
   },
   {
+    "id": "kakao_1772465597",
+    "name": "플레어비 역삼GFC몰점",
+    "description": "플레어비 역삼GFC몰점. 카페 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "카페",
+    "tags": [
+      "음식점",
+      "카페"
+    ],
+    "station": "역삼",
+    "exit_number": 1,
+    "distance_from_station_m": 8,
+    "address": "서울 강남구 테헤란로 152",
+    "lat": 37.5000256817836,
+    "lng": 127.03650986523,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
     "id": "kakao_145574699",
     "name": "커피기업",
     "description": "커피기업. 카페 업소. (카카오 지도 데이터)",
@@ -26261,25 +26286,6 @@
     "address": "서울 강남구 테헤란로 152",
     "lat": 37.5000238801142,
     "lng": 127.036508733456,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
-    "id": "kakao_1772465597",
-    "name": "플레어비 역삼GFC몰점",
-    "description": "플레어비 역삼GFC몰점. 카페 업소. (카카오 지도 데이터)",
-    "category": "카페",
-    "subcategory": "카페",
-    "tags": [
-      "음식점",
-      "카페"
-    ],
-    "station": "역삼",
-    "exit_number": 1,
-    "distance_from_station_m": 8,
-    "address": "서울 강남구 테헤란로 152",
-    "lat": 37.5000256817836,
-    "lng": 127.03650986523,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -26767,25 +26773,6 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_2129861477",
-    "name": "마리짱분식",
-    "description": "마리짱분식. 분식 업소. (카카오 지도 데이터)",
-    "category": "레스토랑",
-    "subcategory": "분식",
-    "tags": [
-      "음식점",
-      "분식"
-    ],
-    "station": "강남",
-    "exit_number": 1,
-    "distance_from_station_m": 68,
-    "address": "서울 강남구 강남대로 지하 396",
-    "lat": 37.4981646510326,
-    "lng": 127.028307900881,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
     "id": "kakao_82706348",
     "name": "브릭샌드 강남역점",
     "description": "브릭샌드 강남역점. 간식 > 제과,베이커리 업소. (카카오 지도 데이터)",
@@ -26802,6 +26789,25 @@
     "address": "서울 강남구 강남대로 지하 396",
     "lat": 37.49816465103256,
     "lng": 127.02830790088052,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_2129861477",
+    "name": "마리짱분식",
+    "description": "마리짱분식. 분식 업소. (카카오 지도 데이터)",
+    "category": "레스토랑",
+    "subcategory": "분식",
+    "tags": [
+      "음식점",
+      "분식"
+    ],
+    "station": "강남",
+    "exit_number": 1,
+    "distance_from_station_m": 68,
+    "address": "서울 강남구 강남대로 지하 396",
+    "lat": 37.4981646510326,
+    "lng": 127.028307900881,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -27041,6 +27047,25 @@
     "price_range": "중간"
   },
   {
+    "id": "kakao_951208864",
+    "name": "바닐라스카이 본점",
+    "description": "바닐라스카이 본점. 카페 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "카페",
+    "tags": [
+      "음식점",
+      "카페"
+    ],
+    "station": "강남",
+    "exit_number": 1,
+    "distance_from_station_m": 68,
+    "address": "서울 강남구 강남대로 지하 396",
+    "lat": 37.4981646510397,
+    "lng": 127.028307900881,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
     "id": "kakao_1433125498",
     "name": "하마커피",
     "description": "하마커피. 카페 업소. (카카오 지도 데이터)",
@@ -27070,25 +27095,6 @@
       "카페",
       "커피전문점",
       "원유로스페셜티"
-    ],
-    "station": "강남",
-    "exit_number": 1,
-    "distance_from_station_m": 68,
-    "address": "서울 강남구 강남대로 지하 396",
-    "lat": 37.4981646510397,
-    "lng": 127.028307900881,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
-    "id": "kakao_951208864",
-    "name": "바닐라스카이 본점",
-    "description": "바닐라스카이 본점. 카페 업소. (카카오 지도 데이터)",
-    "category": "카페",
-    "subcategory": "카페",
-    "tags": [
-      "음식점",
-      "카페"
     ],
     "station": "강남",
     "exit_number": 1,
@@ -27245,25 +27251,6 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_1002482604",
-    "name": "돌핀",
-    "description": "돌핀. 카페 업소. (카카오 지도 데이터)",
-    "category": "카페",
-    "subcategory": "카페",
-    "tags": [
-      "음식점",
-      "카페"
-    ],
-    "station": "강남",
-    "exit_number": 1,
-    "distance_from_station_m": 89,
-    "address": "서울 강남구 테헤란로 101",
-    "lat": 37.49862332097,
-    "lng": 127.028066066684,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
     "id": "kakao_1219634997",
     "name": "테이블비 강남역점",
     "description": "테이블비 강남역점. 카페 업소. (카카오 지도 데이터)",
@@ -27278,6 +27265,25 @@
     "distance_from_station_m": 89,
     "address": "서울 강남구 테헤란로 101",
     "lat": 37.4986233209629,
+    "lng": 127.028066066684,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_1002482604",
+    "name": "돌핀",
+    "description": "돌핀. 카페 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "카페",
+    "tags": [
+      "음식점",
+      "카페"
+    ],
+    "station": "강남",
+    "exit_number": 1,
+    "distance_from_station_m": 89,
+    "address": "서울 강남구 테헤란로 101",
+    "lat": 37.49862332097,
     "lng": 127.028066066684,
     "rating": 0.0,
     "price_range": "중간"
@@ -27443,8 +27449,8 @@
   },
   {
     "id": "kakao_1263453680",
-    "name": "광장818",
-    "description": "광장818. 술집 > 호프,요리주점 업소. (카카오 지도 데이터)",
+    "name": "광장포차818",
+    "description": "광장포차818. 술집 > 호프,요리주점 업소. (카카오 지도 데이터)",
     "category": "술집",
     "subcategory": "호프,요리주점",
     "tags": [
@@ -32869,26 +32875,6 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_688838240",
-    "name": "오레노타코야끼파스타오븐",
-    "description": "오레노타코야끼파스타오븐. 술집 > 일본식주점 업소. (카카오 지도 데이터)",
-    "category": "술집",
-    "subcategory": "일본식주점",
-    "tags": [
-      "음식점",
-      "술집",
-      "일본식주점"
-    ],
-    "station": "봉천",
-    "exit_number": 1,
-    "distance_from_station_m": 144,
-    "address": "서울 관악구 장군봉1길 35",
-    "lat": 37.48180226667637,
-    "lng": 126.94189169057074,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
     "id": "kakao_1261281367",
     "name": "행수전빵 봉천본점",
     "description": "행수전빵 봉천본점. 술집 > 호프,요리주점 업소. (카카오 지도 데이터)",
@@ -32924,6 +32910,26 @@
     "address": "서울 관악구 남부순환로 1726",
     "lat": 37.4820833340078,
     "lng": 126.9417953697,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_1907447309",
+    "name": "수철이네왕새우튀김&떡볶이 봉천점",
+    "description": "수철이네왕새우튀김&떡볶이 봉천점. 술집 > 호프,요리주점 업소. (카카오 지도 데이터)",
+    "category": "술집",
+    "subcategory": "호프,요리주점",
+    "tags": [
+      "음식점",
+      "술집",
+      "호프,요리주점"
+    ],
+    "station": "봉천",
+    "exit_number": 1,
+    "distance_from_station_m": 160,
+    "address": "서울 관악구 장군봉1길 29",
+    "lat": 37.4818382151261,
+    "lng": 126.941705110055,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -35079,26 +35085,6 @@
     "price_range": "중간"
   },
   {
-    "id": "kakao_635445707",
-    "name": "구구팔",
-    "description": "구구팔. 술집 > 호프,요리주점 업소. (카카오 지도 데이터)",
-    "category": "술집",
-    "subcategory": "호프,요리주점",
-    "tags": [
-      "음식점",
-      "술집",
-      "호프,요리주점"
-    ],
-    "station": "대림",
-    "exit_number": 1,
-    "distance_from_station_m": 123,
-    "address": "서울 영등포구 대림로23길 29",
-    "lat": 37.4924654881956,
-    "lng": 126.897769351315,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
     "id": "kakao_16474529",
     "name": "해림호프",
     "description": "해림호프. 술집 > 호프,요리주점 업소. (카카오 지도 데이터)",
@@ -35115,6 +35101,26 @@
     "address": "서울 영등포구 도림천로11길 25",
     "lat": 37.492087248525,
     "lng": 126.897981322027,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_425634926",
+    "name": "코코호프",
+    "description": "코코호프. 술집 > 호프,요리주점 업소. (카카오 지도 데이터)",
+    "category": "술집",
+    "subcategory": "호프,요리주점",
+    "tags": [
+      "음식점",
+      "술집",
+      "호프,요리주점"
+    ],
+    "station": "대림",
+    "exit_number": 1,
+    "distance_from_station_m": 132,
+    "address": "서울 영등포구 도림천로11길 24",
+    "lat": 37.4918620019197,
+    "lng": 126.897987282252,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -35889,6 +35895,27 @@
     "price_range": "중간"
   },
   {
+    "id": "kakao_216010792",
+    "name": "마성떡볶이 영등포구청역점",
+    "description": "마성떡볶이 영등포구청역점. 분식 > 떡볶이 > 마성떡볶이 업소. (카카오 지도 데이터)",
+    "category": "레스토랑",
+    "subcategory": "마성떡볶이",
+    "tags": [
+      "음식점",
+      "분식",
+      "떡볶이",
+      "마성떡볶이"
+    ],
+    "station": "영등포구청",
+    "exit_number": 1,
+    "distance_from_station_m": 22,
+    "address": "서울 영등포구 당산로 지하 121",
+    "lat": 37.52533487377571,
+    "lng": 126.89655590495384,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
     "id": "kakao_2128882672",
     "name": "빵굼터 영등포구청역점",
     "description": "빵굼터 영등포구청역점. 간식 > 제과,베이커리 > 빵굼터 업소. (카카오 지도 데이터)",
@@ -36124,27 +36151,6 @@
     "address": "서울 영등포구 국회대로34길 20-1",
     "lat": 37.5257768483688,
     "lng": 126.897109624197,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
-    "id": "kakao_216010792",
-    "name": "마성떡볶이 영등포구청역점",
-    "description": "마성떡볶이 영등포구청역점. 분식 > 떡볶이 > 마성떡볶이 업소. (카카오 지도 데이터)",
-    "category": "레스토랑",
-    "subcategory": "마성떡볶이",
-    "tags": [
-      "음식점",
-      "분식",
-      "떡볶이",
-      "마성떡볶이"
-    ],
-    "station": "영등포구청",
-    "exit_number": 1,
-    "distance_from_station_m": 70,
-    "address": "서울 영등포구 당산로 지하 121",
-    "lat": 37.52486174921061,
-    "lng": 126.89644343113567,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -36953,6 +36959,318 @@
     "address": "서울 영등포구 당산로45길 7",
     "lat": 37.53366360344798,
     "lng": 126.90060614233239,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_207762326",
+    "name": "스타벅스 당산역사거리점",
+    "description": "스타벅스 당산역사거리점. 카페 > 커피전문점 > 스타벅스 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "스타벅스",
+    "tags": [
+      "음식점",
+      "카페",
+      "커피전문점",
+      "스타벅스"
+    ],
+    "station": "당산",
+    "exit_number": 1,
+    "distance_from_station_m": 81,
+    "address": "서울 영등포구 양평로 47",
+    "lat": 37.5339568500424,
+    "lng": 126.901108098452,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_1605192072",
+    "name": "빌리엔젤 당산역점",
+    "description": "빌리엔젤 당산역점. 카페 > 테마카페 > 디저트카페 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "디저트카페",
+    "tags": [
+      "음식점",
+      "카페",
+      "테마카페",
+      "디저트카페"
+    ],
+    "station": "당산",
+    "exit_number": 1,
+    "distance_from_station_m": 95,
+    "address": "서울 영등포구 당산로 223",
+    "lat": 37.5337884483411,
+    "lng": 126.901210147334,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_531202337",
+    "name": "메가MGC커피 당산역점",
+    "description": "메가MGC커피 당산역점. 카페 > 커피전문점 > 메가MGC커피 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "메가MGC커피",
+    "tags": [
+      "음식점",
+      "카페",
+      "커피전문점",
+      "메가MGC커피"
+    ],
+    "station": "당산",
+    "exit_number": 1,
+    "distance_from_station_m": 99,
+    "address": "서울 영등포구 양평로 67",
+    "lat": 37.5348502613164,
+    "lng": 126.899588550664,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_23326001",
+    "name": "스타벅스 당산점",
+    "description": "스타벅스 당산점. 카페 > 커피전문점 > 스타벅스 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "스타벅스",
+    "tags": [
+      "음식점",
+      "카페",
+      "커피전문점",
+      "스타벅스"
+    ],
+    "station": "당산",
+    "exit_number": 1,
+    "distance_from_station_m": 112,
+    "address": "서울 영등포구 양평로 64",
+    "lat": 37.53509110955789,
+    "lng": 126.89991973539829,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_1351592",
+    "name": "할리스 당산역점",
+    "description": "할리스 당산역점. 카페 > 커피전문점 > 할리스 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "할리스",
+    "tags": [
+      "음식점",
+      "카페",
+      "커피전문점",
+      "할리스"
+    ],
+    "station": "당산",
+    "exit_number": 1,
+    "distance_from_station_m": 116,
+    "address": "서울 영등포구 당산로 219",
+    "lat": 37.533465015020006,
+    "lng": 126.90124112178198,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_1885535208",
+    "name": "설빙 당산점",
+    "description": "설빙 당산점. 카페 > 테마카페 > 디저트카페 > 설빙 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "설빙",
+    "tags": [
+      "음식점",
+      "카페",
+      "테마카페",
+      "디저트카페",
+      "설빙"
+    ],
+    "station": "당산",
+    "exit_number": 1,
+    "distance_from_station_m": 127,
+    "address": "서울 영등포구 양평로 67",
+    "lat": 37.5349653001496,
+    "lng": 126.899248969361,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_369389585",
+    "name": "컴포즈커피 당산한강포스빌점",
+    "description": "컴포즈커피 당산한강포스빌점. 카페 > 커피전문점 > 컴포즈커피 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "컴포즈커피",
+    "tags": [
+      "음식점",
+      "카페",
+      "커피전문점",
+      "컴포즈커피"
+    ],
+    "station": "당산",
+    "exit_number": 1,
+    "distance_from_station_m": 127,
+    "address": "서울 영등포구 양평로 67",
+    "lat": 37.5349643991502,
+    "lng": 126.899248970573,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_1398348371",
+    "name": "카페드카비",
+    "description": "카페드카비. 카페 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "카페",
+    "tags": [
+      "음식점",
+      "카페"
+    ],
+    "station": "당산",
+    "exit_number": 1,
+    "distance_from_station_m": 134,
+    "address": "서울 영등포구 양평로 48",
+    "lat": 37.534709524079716,
+    "lng": 126.90151328425205,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_117173672",
+    "name": "백미당 당산점",
+    "description": "백미당 당산점. 카페 > 테마카페 > 디저트카페 > 백미당 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "백미당",
+    "tags": [
+      "음식점",
+      "카페",
+      "테마카페",
+      "디저트카페",
+      "백미당"
+    ],
+    "station": "당산",
+    "exit_number": 1,
+    "distance_from_station_m": 149,
+    "address": "서울 영등포구 선유동2로 74",
+    "lat": 37.5348928681203,
+    "lng": 126.898837229034,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_73542323",
+    "name": "커피사피엔스 당산효성해링턴점",
+    "description": "커피사피엔스 당산효성해링턴점. 카페 > 커피전문점 > 커피사피엔스 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "커피사피엔스",
+    "tags": [
+      "음식점",
+      "카페",
+      "커피전문점",
+      "커피사피엔스"
+    ],
+    "station": "당산",
+    "exit_number": 1,
+    "distance_from_station_m": 169,
+    "address": "서울 영등포구 당산로 205",
+    "lat": 37.532573153505815,
+    "lng": 126.90032247982033,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_574443798",
+    "name": "베베커피로스터즈",
+    "description": "베베커피로스터즈. 카페 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "카페",
+    "tags": [
+      "음식점",
+      "카페"
+    ],
+    "station": "당산",
+    "exit_number": 1,
+    "distance_from_station_m": 177,
+    "address": "서울 영등포구 선유로52길 12",
+    "lat": 37.5355998080763,
+    "lng": 126.899487979566,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_1800759658",
+    "name": "요앤스",
+    "description": "요앤스. 카페 > 테마카페 > 디저트카페 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "디저트카페",
+    "tags": [
+      "음식점",
+      "카페",
+      "테마카페",
+      "디저트카페"
+    ],
+    "station": "당산",
+    "exit_number": 1,
+    "distance_from_station_m": 187,
+    "address": "서울 영등포구 선유동2로 67",
+    "lat": 37.53462561029285,
+    "lng": 126.89818363020498,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_15823509",
+    "name": "카페맑음",
+    "description": "카페맑음. 카페 > 커피전문점 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "커피전문점",
+    "tags": [
+      "음식점",
+      "카페",
+      "커피전문점"
+    ],
+    "station": "당산",
+    "exit_number": 1,
+    "distance_from_station_m": 192,
+    "address": "서울 영등포구 선유동2로 65-1",
+    "lat": 37.5344885627419,
+    "lng": 126.898072937721,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_13062100",
+    "name": "이디야커피 당산역점",
+    "description": "이디야커피 당산역점. 카페 > 커피전문점 > 이디야커피 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "이디야커피",
+    "tags": [
+      "음식점",
+      "카페",
+      "커피전문점",
+      "이디야커피"
+    ],
+    "station": "당산",
+    "exit_number": 1,
+    "distance_from_station_m": 193,
+    "address": "서울 영등포구 당산로 222",
+    "lat": 37.53334325312049,
+    "lng": 126.90217129236832,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
+    "id": "kakao_1020009918",
+    "name": "매머드익스프레스 당산양화대교남단점",
+    "description": "매머드익스프레스 당산양화대교남단점. 카페 > 커피전문점 > 매머드익스프레스 업소. (카카오 지도 데이터)",
+    "category": "카페",
+    "subcategory": "매머드익스프레스",
+    "tags": [
+      "음식점",
+      "카페",
+      "커피전문점",
+      "매머드익스프레스"
+    ],
+    "station": "당산",
+    "exit_number": 1,
+    "distance_from_station_m": 193,
+    "address": "서울 영등포구 선유로54길 14",
+    "lat": 37.5358308434197,
+    "lng": 126.899934586949,
     "rating": 0.0,
     "price_range": "중간"
   },
@@ -45047,6 +45365,25 @@
     "price_range": "중간"
   },
   {
+    "id": "kakao_696358068",
+    "name": "테일러바",
+    "description": "테일러바. 술집 업소. (카카오 지도 데이터)",
+    "category": "술집",
+    "subcategory": "술집",
+    "tags": [
+      "음식점",
+      "술집"
+    ],
+    "station": "마포",
+    "exit_number": 1,
+    "distance_from_station_m": 320,
+    "address": "서울 마포구 삼개로 11",
+    "lat": 37.53938549379776,
+    "lng": 126.94775567793273,
+    "rating": 0.0,
+    "price_range": "중간"
+  },
+  {
     "id": "kakao_800937071",
     "name": "요리연구가의연구실",
     "description": "요리연구가의연구실. 술집 > 호프,요리주점 업소. (카카오 지도 데이터)",
@@ -45104,27 +45441,6 @@
     "address": "서울 마포구 삼개로 9",
     "lat": 37.539509800695015,
     "lng": 126.94768543866444,
-    "rating": 0.0,
-    "price_range": "중간"
-  },
-  {
-    "id": "kakao_8127983",
-    "name": "투다리 마포점",
-    "description": "투다리 마포점. 술집 > 오뎅바 > 투다리 업소. (카카오 지도 데이터)",
-    "category": "술집",
-    "subcategory": "투다리",
-    "tags": [
-      "음식점",
-      "술집",
-      "오뎅바",
-      "투다리"
-    ],
-    "station": "마포",
-    "exit_number": 1,
-    "distance_from_station_m": 333,
-    "address": "서울 마포구 도화2길 6",
-    "lat": 37.5401868839369,
-    "lng": 126.948670504523,
     "rating": 0.0,
     "price_range": "중간"
   },

@@ -1,9 +1,12 @@
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 import chromadb
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from core.config import get_settings
 from domain.models import Place
@@ -13,7 +16,10 @@ from infrastructure.vector.chroma_vector_repository import _place_to_metadata
 
 def _build_embedding_text(place: Place) -> str:
     tags_str = " ".join(place.tags)
-    return f"{place.name} {place.category} {place.subcategory} {tags_str} {place.description}"
+    return (
+        f"{place.name} {place.category} {place.subcategory} "
+        f"{tags_str} {place.description}"
+    )
 
 
 def main() -> None:
@@ -45,7 +51,10 @@ def main() -> None:
         documents=texts,
         metadatas=[_place_to_metadata(p) for p in places],
     )
-    print(f"[OK] Ingested {len(places)} places into ChromaDB collection '{settings.chroma_collection_name}'")
+    print(
+        f"[OK] Ingested {len(places)} places into ChromaDB collection "
+        f"'{settings.chroma_collection_name}'"
+    )
 
 
 if __name__ == "__main__":
