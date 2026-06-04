@@ -2,6 +2,69 @@
 
 ---
 
+## Unit 5 Kakao Places Integration - Stabilization
+**Timestamp**: 2026-06-03T16:15:00+09:00
+**User Input**: "진행해"
+**AI Response**: Kakao Places collection and ChromaDB ingest were executed. Collection succeeded once with 2,287 places and ingest succeeded into ChromaDB collection `places`. Follow-up diagnostics showed Kakao API now returns `API limit has been exceeded`. Added request-level retry/rate limiting, warning logs with response body snippets, failure counting, and partial-output protection so failed runs write `places.partial.json` instead of overwriting `places.json`. Added Kakao fetcher unit tests and updated station-count test.
+**Verification**: `pytest` passed: 66 tests, 89.88% coverage. Ruff passed for modified files. Full Ruff/mypy still report pre-existing repository-wide issues outside this stabilization scope.
+**Context**: CONSTRUCTION - Unit 5: Kakao Places Integration stabilization
+
+---
+
+## Recommendation Fallback - Empty Station Data Handling
+**Timestamp**: 2026-06-03T22:20:00+09:00
+**User Input**: "그렇게 변경해봐"
+**AI Response**: Added nearest-station candidate fallback for recommendations. `StationRepository` now exposes ordered nearest candidates, `MidpointService` delegates candidate lookup, and `RecommendationService` searches up to 5 nearest stations until recommendations are found. Verified the previously failing Seoul City Hall/Gangnam midpoint case now returns results from the next available station data.
+**Verification**: `pytest` passed: 69 tests, 90.23% coverage. Ruff passed for fallback core files.
+**Context**: CONSTRUCTION - Unit 5: recommendation resilience
+
+---
+
+## Recommendation Station Selection Branch
+**Timestamp**: 2026-06-03T22:35:00+09:00
+**User Input**: "만약, 중간으로 나온 역에 주변에 아무것도 없다면 너가 말한대로 거기서 가까운 역 3개(이때 추천할만한 곳이 있어야됨)를 사용자가 선택할 수 있는 분기 처리를 해줘."
+**AI Response**: Changed recommendation behavior from automatic fallback to an explicit station-selection branch. If the midpoint station has no recommendations, `/api/v1/recommend` returns `status=station_selection_required`, the midpoint station, and up to 3 nearby station options that each have recommendations. Clients can retry with `selected_station_id` to receive `status=ok` recommendations for the chosen station.
+**Verification**: `pytest` passed: 74 tests, 91.25% coverage. Ruff passed for changed API/service/test files. Real ChromaDB check returned options for the previous no-data midpoint: 한강진 -> 옥수, 동대입구, 금호.
+**Context**: CONSTRUCTION - Unit 5: user-selectable fallback branch
+
+---
+
+## Kakao Map Search Link for Midpoint Station
+**Timestamp**: 2026-06-03T23:05:00+09:00
+**User Input**: "이제 만약, 중간역에 아무것도 없다면 ... 카카오맵에 바로 강남역 \"추천 카페\" 등으로 검색할 수 있도록 연결하면 좋을 것 같아. API가 아닌 카카오맵에 접근하는거지"
+**AI Response**: Added a `map_search` object to `station_selection_required` responses. It contains a user-facing label, the combined search query, and a `https://map.kakao.com/link/search/{query}` URL for opening Kakao Map directly with the original midpoint station and user query.
+**Verification**: `pytest` passed: 74 tests, 91.44% coverage. Ruff passed for changed API/test files. Link generation verified with `한강진 조용한 카페`.
+**Context**: CONSTRUCTION - Unit 5: external Kakao Map handoff
+
+---
+
+## API Contract Documentation
+**Timestamp**: 2026-06-03T23:15:00+09:00
+**User Input**: "그럼 그렇게 해"
+**AI Response**: Added `docs/API.md` instead of modifying the existing README, because the README has encoding corruption. The new API guide documents `/api/v1/midpoint`, `/api/v1/recommend`, direct success responses, station-selection responses, second request with `selected_station_id`, Kakao Map search handoff, and error responses.
+**Verification**: Validated all JSON examples in `docs/API.md`.
+**Context**: Documentation - current API contract
+
+---
+
+## Static Frontend Implementation
+**Timestamp**: 2026-06-03T23:30:00+09:00
+**User Input**: "프론트 화면 만들어"
+**AI Response**: Added a static frontend under `frontend/` and served it from FastAPI at `/` with `/static/*` assets. The UI supports coordinate entry, top-k/query controls, direct recommendation results, station-selection-required flow, selected-station retry, and Kakao Map handoff. Updated `api/main.py` to serve the frontend.
+**Verification**: `pytest` passed: 74 tests, 91.37% coverage. `node --check frontend/app.js` passed. `ruff check api/main.py` passed. HTTP checks for `/`, `/static/app.js`, and `/static/styles.css` returned 200. Browser plugin verification was attempted twice but failed due to a local sandbox startup error, so HTTP and syntax checks were used instead.
+**Context**: UI - static local frontend
+
+---
+
+## Station Name Input
+**Timestamp**: 2026-06-03T23:45:00+09:00
+**User Input**: "지금 위도와 경도로 입력하도록 되어 있는데, 나는 단순히 사용자 입력은 ~~역으로 해서 해당 역을 서버에서 알아서 위도 경도 계산하거나 해서 중간여을 게산했으면 좋겠어"
+**AI Response**: Added server-side station-name resolution. `/api/v1/midpoint` and `/api/v1/recommend` now accept `stations` as an alternative to legacy coordinate `locations`; station names such as `강남역` normalize to the repository station `강남`. Updated the frontend to collect station names instead of latitude/longitude and send `stations` in API requests.
+**Verification**: `pytest` passed: 78 tests, 90.75% coverage. `node --check frontend/app.js` passed. Ruff passed for station-input-related files. Live server check with `stations=['서울역','강남역']` returned 200 and midpoint station `한강진`.
+**Context**: API/UI - station-name input flow
+
+---
+
 ## 카카오 Places API 연동 — Code Generation 시작
 **Timestamp**: 2026-05-29T01:05:00Z
 **User Input**: "A, A, A, B"

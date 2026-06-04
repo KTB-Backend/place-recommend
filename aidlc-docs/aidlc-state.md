@@ -1,5 +1,21 @@
 # AI-DLC State Tracking
 
+## Current Snapshot - 2026-06-03
+- **Lifecycle Phase**: CONSTRUCTION
+- **Current Stage**: Unit 5 Kakao Places Integration - Stabilization
+- **Base MVP Status**: Units 1-4 and Build/Test are implemented.
+- **Kakao Collection Status**: One successful run collected 2,287 places into `data/processed/places.json`.
+- **Vector DB Status**: ChromaDB ingest succeeded for 2,287 places in collection `places`.
+- **Current Blocker**: The configured Kakao REST API key is returning `API limit has been exceeded`.
+- **Safety Change**: Failed/partial Kakao collection now writes `data/processed/places.partial.json` instead of overwriting `data/processed/places.json`.
+- **Recommendation Fallback**: `/recommend` now returns `station_selection_required` with up to 3 recommendable nearby station options when the midpoint station has no results. Clients can retry with `selected_station_id` to receive recommendations for the chosen station.
+- **Kakao Map Link**: Selection-required responses include `map_search`, a direct Kakao Map search link for the original midpoint station and user query.
+- **API Documentation**: Added `docs/API.md` with current `/midpoint` and `/recommend` request/response contracts, station selection flow, and Kakao Map handoff.
+- **Frontend**: Added a static frontend served from `/` with coordinate inputs, recommendation results, station selection, and Kakao Map handoff.
+- **Station Name Input**: Frontend now accepts station names such as `서울역` and `강남역`. API requests support `stations` and convert names to coordinates on the server.
+- **Verification**: `pytest` passes with 78 tests and 90.75% coverage.
+- **Next Step**: Wait for Kakao API quota reset or use a fresh REST API key, then rerun full collection and ingest.
+
 ## Project Information
 - **Project Type**: Greenfield
 - **Source Reference**: `C:\Users\Owner\where-meeting` (RAG 기반 장소 추천 시스템 - 참조 구현체)
