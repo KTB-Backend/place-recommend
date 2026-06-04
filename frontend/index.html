@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Where</title>
+    <title>mid-meet</title>
     <link rel="stylesheet" href="/static/styles.css" />
   </head>
   <body>
@@ -11,8 +11,8 @@
       <section class="workspace" aria-label="추천 요청">
         <header class="topbar">
           <div>
-            <p class="eyebrow">Where</p>
-            <h1>중간 지점 장소 추천</h1>
+            <p class="eyebrow">mid-meet</p>
+            <h1>중간역 기반 장소 추천</h1>
           </div>
           <a class="docs-link" href="/docs" target="_blank" rel="noreferrer">
             API Docs
@@ -34,19 +34,19 @@
             </div>
 
             <div class="field-row compact">
-              <label for="top-k">추천 수</label>
+              <label for="top-k">추천 개수</label>
               <input id="top-k" name="top_k" type="number" min="1" max="20" value="3" />
             </div>
 
-            <section class="locations-block" aria-label="출발 역">
+            <section class="locations-block" aria-label="출발역">
               <div class="section-heading">
-                <h2>출발 역</h2>
+                <h2>출발역</h2>
                 <button
                   class="icon-button"
                   id="add-location"
                   type="button"
-                  aria-label="출발 역 추가"
-                  title="출발 역 추가"
+                  aria-label="출발역 추가"
+                  title="출발역 추가"
                 >
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M12 5v14M5 12h14" />
@@ -65,13 +65,13 @@
                 추천 받기
               </button>
               <button id="sample-button" class="secondary-button" type="button">
-                샘플 좌표
+                예시 입력
               </button>
             </div>
           </form>
 
           <section class="map-panel" aria-label="중간 지점 시각화">
-            <svg class="map-visual" viewBox="0 0 720 520" role="img" aria-label="도시 이동 경로">
+            <svg class="map-visual" viewBox="0 0 720 520" role="img" aria-label="예시 이동 경로">
               <defs>
                 <linearGradient id="river" x1="0" x2="1">
                   <stop offset="0" stop-color="#d8f0ef" />
@@ -132,7 +132,7 @@
         </div>
 
         <div id="result-content" class="result-content empty-state">
-          <p>좌표와 장소를 입력하면 추천 결과가 표시됩니다.</p>
+          <p>출발역과 원하는 장소를 입력하면 추천 결과가 표시됩니다.</p>
         </div>
       </aside>
     </main>

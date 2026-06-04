@@ -349,6 +349,15 @@ input:focus {
   background: var(--surface-2);
 }
 
+.summary-band.success {
+  border-color: rgba(29, 111, 95, 0.28);
+}
+
+.summary-band.warning {
+  border-color: rgba(184, 111, 29, 0.38);
+  background: #fff8ec;
+}
+
 .summary-band strong {
   font-size: 17px;
 }
@@ -368,6 +377,12 @@ input:focus {
   border-radius: 8px;
   padding: 14px;
   background: #fff;
+}
+
+.section-note {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 800;
 }
 
 .option-card {

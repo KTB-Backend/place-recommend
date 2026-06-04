@@ -30,7 +30,7 @@ function escapeHtml(value) {
 }
 
 function stationLabel(station) {
-  if (!station) return "알 수 없음";
+  if (!station) return "역 정보 없음";
   return `${station.name} · ${station.line}`;
 }
 
@@ -66,7 +66,7 @@ function renderLocations() {
           value="${escapeHtml(station)}" placeholder="예: 강남역" required />
       </div>
       <button class="icon-button" type="button" data-remove="${index}"
-        aria-label="출발 위치 삭제" title="출발 위치 삭제">
+        aria-label="출발역 제거" title="출발역 제거">
         <svg viewBox="0 0 24 24" aria-hidden="true">
           <path d="M5 12h14" />
         </svg>
@@ -109,7 +109,7 @@ async function postRecommend(payload) {
 function renderEmpty() {
   resultTitle.textContent = "아직 결과가 없습니다";
   resultContent.className = "result-content empty-state";
-  resultContent.innerHTML = "<p>출발 역과 장소를 입력하면 추천 결과가 표시됩니다.</p>";
+  resultContent.innerHTML = "<p>출발역과 원하는 장소를 입력하면 추천 결과가 표시됩니다.</p>";
   setStatus("요청 대기 중");
 }
 
@@ -124,9 +124,9 @@ function renderRecommendations(decision) {
   resultTitle.textContent = `${decision.station.name} 추천`;
   resultContent.className = "result-content";
   resultContent.innerHTML = `
-    <div class="summary-band">
+    <div class="summary-band success">
       <strong>${escapeHtml(stationLabel(decision.station))}</strong>
-      <p>중간역 ${escapeHtml(stationLabel(decision.meeting_station))} 기준</p>
+      <p>중간역 ${escapeHtml(stationLabel(decision.meeting_station))} 기준으로 추천 데이터를 찾았습니다.</p>
     </div>
     ${decision.recommendations.map(renderPlace).join("")}
   `;
@@ -134,20 +134,21 @@ function renderRecommendations(decision) {
 }
 
 function renderSelection(decision) {
-  resultTitle.textContent = "주변 역을 선택하세요";
+  resultTitle.textContent = "중간역 주변 데이터 없음";
   resultContent.className = "result-content";
   resultContent.innerHTML = `
-    <div class="summary-band">
+    <div class="summary-band warning">
       <strong>${escapeHtml(stationLabel(decision.meeting_station))}</strong>
-      <p>현재 DB 추천이 없어 가까운 역 후보를 준비했습니다.</p>
+      <p>현재 DB에는 이 중간역 주변 추천 데이터가 없습니다. 추천 데이터가 있는 가까운 역을 선택하거나, 기존 중간역을 Kakao Map에서 바로 검색할 수 있습니다.</p>
       <a class="map-link" href="${escapeHtml(decision.map_search.url)}"
         target="_blank" rel="noreferrer">
         ${escapeHtml(decision.map_search.label)}
       </a>
     </div>
+    <div class="section-note">추천 가능한 주변역</div>
     ${decision.options.map(renderOption).join("")}
   `;
-  setStatus(`${decision.meeting_station.name} 대신 선택 가능한 역 ${decision.options.length}개`);
+  setStatus(`${decision.meeting_station.name} 데이터 없음 · 주변역 ${decision.options.length}개 선택 가능`);
 }
 
 function renderOption(option) {
@@ -175,7 +176,7 @@ function renderOption(option) {
       <ul class="preview-list">${previewItems}</ul>
       <button class="choice-button" type="button"
         data-station-id="${escapeHtml(option.station.id)}">
-        이 역으로 보기
+        이 역으로 추천 보기
       </button>
     </article>
   `;
@@ -214,7 +215,7 @@ async function submitRecommendation(selectedStationId = null) {
     return;
   }
   if (!payload.stations || payload.stations.length < 2) {
-    renderError(new Error("출발 역은 최소 2개가 필요합니다."));
+    renderError(new Error("출발역은 최소 2개가 필요합니다."));
     return;
   }
 
