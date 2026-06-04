@@ -5,12 +5,28 @@ from fastapi.testclient import TestClient
 
 from api.dependencies import get_embedder, get_station_repo, get_vector_repo
 from api.main import app
-from domain.exceptions import NoNearbyStationError, NoRecommendationsError, VectorDBError
+from domain.exceptions import (
+    NoNearbyStationError,
+    NoRecommendationsError,
+    VectorDBError,
+)
 from domain.interfaces import EmbeddingPort, StationRepository, VectorRepository
 from domain.models import Location, Place, Recommendation, Station
 
-# ── 픽스처 데이터 ────────────────────────────────────────────────────────
-SAMPLE_STATION = Station(id="gangnam", name="강남", line="2호선", lat=37.4979, lng=127.0276)
+SAMPLE_STATION = Station(
+    id="gangnam",
+    name="강남",
+    line="2호선",
+    lat=37.4979,
+    lng=127.0276,
+)
+SAMPLE_OPTION_STATION = Station(
+    id="oksu",
+    name="옥수",
+    line="3호선",
+    lat=37.5440,
+    lng=127.0182,
+)
 SAMPLE_PLACE = Place(
     id="cafe_1",
     name="테스트 카페",
@@ -35,7 +51,6 @@ LOCATIONS_PAYLOAD = [
 ]
 
 
-# ── Mock 구현체 ──────────────────────────────────────────────────────────
 class MockEmbedder(EmbeddingPort):
     def embed(self, texts: list[str]) -> list[list[float]]:
         return [[0.1] * 10 for _ in texts]
@@ -53,6 +68,21 @@ class MockStationRepo(StationRepository):
             raise NoNearbyStationError("역 없음")
         return SAMPLE_STATION
 
+    def find_nearest_candidates(
+        self,
+        location: Location,
+        limit: int,
+    ) -> list[Station]:
+        if self._raise_error:
+            raise NoNearbyStationError("역 없음")
+        return [SAMPLE_STATION, SAMPLE_OPTION_STATION][:limit]
+
+    def find_by_name(self, name: str) -> Station | None:
+        if self._raise_error:
+            raise NoNearbyStationError("역 없음")
+        stations = {SAMPLE_STATION.name: SAMPLE_STATION, "강남역": SAMPLE_STATION}
+        return stations.get(name)
+
 
 class MockVectorRepo(VectorRepository):
     def __init__(self, mode: str = "ok") -> None:
@@ -66,14 +96,17 @@ class MockVectorRepo(VectorRepository):
     ) -> list[Recommendation]:
         if self._mode == "empty":
             raise NoRecommendationsError("추천 없음")
+        if self._mode == "selection":
+            if station_name == SAMPLE_STATION.name:
+                return []
+            return [SAMPLE_RECOMMENDATION]
         if self._mode == "error":
             raise VectorDBError("DB 오류")
         return [SAMPLE_RECOMMENDATION]
 
 
-# ── 픽스처 ───────────────────────────────────────────────────────────────
 @pytest.fixture
-def client():
+def client() -> TestClient:
     app.dependency_overrides[get_embedder] = lambda: MockEmbedder()
     app.dependency_overrides[get_station_repo] = lambda: MockStationRepo()
     app.dependency_overrides[get_vector_repo] = lambda: MockVectorRepo()
@@ -83,9 +116,11 @@ def client():
 
 
 @pytest.fixture
-def client_no_station():
+def client_no_station() -> TestClient:
     app.dependency_overrides[get_embedder] = lambda: MockEmbedder()
-    app.dependency_overrides[get_station_repo] = lambda: MockStationRepo(raise_error=True)
+    app.dependency_overrides[get_station_repo] = lambda: MockStationRepo(
+        raise_error=True
+    )
     app.dependency_overrides[get_vector_repo] = lambda: MockVectorRepo()
     with TestClient(app) as c:
         yield c
@@ -93,7 +128,7 @@ def client_no_station():
 
 
 @pytest.fixture
-def client_no_recommendations():
+def client_no_recommendations() -> TestClient:
     app.dependency_overrides[get_embedder] = lambda: MockEmbedder()
     app.dependency_overrides[get_station_repo] = lambda: MockStationRepo()
     app.dependency_overrides[get_vector_repo] = lambda: MockVectorRepo(mode="empty")
@@ -103,7 +138,7 @@ def client_no_recommendations():
 
 
 @pytest.fixture
-def client_vector_db_error():
+def client_vector_db_error() -> TestClient:
     app.dependency_overrides[get_embedder] = lambda: MockEmbedder()
     app.dependency_overrides[get_station_repo] = lambda: MockStationRepo()
     app.dependency_overrides[get_vector_repo] = lambda: MockVectorRepo(mode="error")
@@ -112,7 +147,16 @@ def client_vector_db_error():
     app.dependency_overrides.clear()
 
 
-# ── /midpoint 테스트 ─────────────────────────────────────────────────────
+@pytest.fixture
+def client_selection_required() -> TestClient:
+    app.dependency_overrides[get_embedder] = lambda: MockEmbedder()
+    app.dependency_overrides[get_station_repo] = lambda: MockStationRepo()
+    app.dependency_overrides[get_vector_repo] = lambda: MockVectorRepo(mode="selection")
+    with TestClient(app) as c:
+        yield c
+    app.dependency_overrides.clear()
+
+
 def test_midpoint_happy_path(client: TestClient) -> None:
     resp = client.post("/api/v1/midpoint", json={"locations": LOCATIONS_PAYLOAD})
     assert resp.status_code == 200
@@ -124,17 +168,31 @@ def test_midpoint_happy_path(client: TestClient) -> None:
 
 
 def test_midpoint_no_station(client_no_station: TestClient) -> None:
-    resp = client_no_station.post("/api/v1/midpoint", json={"locations": LOCATIONS_PAYLOAD})
+    resp = client_no_station.post(
+        "/api/v1/midpoint",
+        json={"locations": LOCATIONS_PAYLOAD},
+    )
     assert resp.status_code == 404
     assert "역을 찾을 수 없습니다" in resp.json()["detail"]
 
 
 def test_midpoint_validation_one_location(client: TestClient) -> None:
-    resp = client.post("/api/v1/midpoint", json={"locations": [{"lat": 37.5, "lng": 127.0}]})
+    resp = client.post(
+        "/api/v1/midpoint",
+        json={"locations": [{"lat": 37.5, "lng": 127.0}]},
+    )
     assert resp.status_code == 422
 
 
-# ── /recommend 테스트 ────────────────────────────────────────────────────
+def test_midpoint_accepts_station_names(client: TestClient) -> None:
+    resp = client.post(
+        "/api/v1/midpoint",
+        json={"stations": ["강남역", "강남"]},
+    )
+    assert resp.status_code == 200
+    assert resp.json()["id"] == SAMPLE_STATION.id
+
+
 def test_recommend_happy_path(client: TestClient) -> None:
     resp = client.post(
         "/api/v1/recommend",
@@ -142,13 +200,59 @@ def test_recommend_happy_path(client: TestClient) -> None:
     )
     assert resp.status_code == 200
     data = resp.json()
-    assert isinstance(data, list)
-    assert len(data) == 1
-    assert data[0]["similarity_score"] == pytest.approx(0.87)
-    assert data[0]["place"]["name"] == SAMPLE_PLACE.name
+    assert data["status"] == "ok"
+    assert data["station"]["id"] == SAMPLE_STATION.id
+    assert len(data["recommendations"]) == 1
+    assert data["recommendations"][0]["similarity_score"] == pytest.approx(0.87)
+    assert data["recommendations"][0]["place"]["name"] == SAMPLE_PLACE.name
 
 
-def test_recommend_no_recommendations(client_no_recommendations: TestClient) -> None:
+def test_recommend_accepts_station_names(client: TestClient) -> None:
+    resp = client.post(
+        "/api/v1/recommend",
+        json={"stations": ["강남역", "강남"], "query": "조용한 카페", "top_k": 1},
+    )
+    assert resp.status_code == 200
+    assert resp.json()["status"] == "ok"
+
+
+def test_recommend_returns_station_options_when_primary_empty(
+    client_selection_required: TestClient,
+) -> None:
+    resp = client_selection_required.post(
+        "/api/v1/recommend",
+        json={"locations": LOCATIONS_PAYLOAD, "query": "조용한 카페", "top_k": 1},
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["status"] == "station_selection_required"
+    assert data["meeting_station"]["id"] == SAMPLE_STATION.id
+    assert data["map_search"]["query"] == "강남 조용한 카페"
+    assert data["map_search"]["url"].startswith("https://map.kakao.com/link/search/")
+    assert data["options"][0]["station"]["id"] == SAMPLE_OPTION_STATION.id
+    assert data["options"][0]["recommendations"]
+
+
+def test_recommend_selected_station(client_selection_required: TestClient) -> None:
+    resp = client_selection_required.post(
+        "/api/v1/recommend",
+        json={
+            "locations": LOCATIONS_PAYLOAD,
+            "query": "조용한 카페",
+            "top_k": 1,
+            "selected_station_id": SAMPLE_OPTION_STATION.id,
+        },
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["status"] == "ok"
+    assert data["station"]["id"] == SAMPLE_OPTION_STATION.id
+    assert len(data["recommendations"]) == 1
+
+
+def test_recommend_no_recommendations(
+    client_no_recommendations: TestClient,
+) -> None:
     resp = client_no_recommendations.post(
         "/api/v1/recommend",
         json={"locations": LOCATIONS_PAYLOAD, "query": "조용한 카페"},

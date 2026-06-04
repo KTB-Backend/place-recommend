@@ -187,7 +187,30 @@ class HardcodedStationRepository(StationRepository):
     ]
 
     def find_nearest(self, location: Location) -> Station:
-        return min(
+        return self.find_nearest_candidates(location, limit=1)[0]
+
+    def find_nearest_candidates(
+        self,
+        location: Location,
+        limit: int,
+    ) -> list[Station]:
+        if limit <= 0:
+            return []
+        return sorted(
             self._STATIONS,
             key=lambda s: _haversine(location.lat, location.lng, s.lat, s.lng),
-        )
+        )[:limit]
+
+    def find_by_name(self, name: str) -> Station | None:
+        target = _normalize_station_name(name)
+        for station in self._STATIONS:
+            if _normalize_station_name(station.name) == target:
+                return station
+        return None
+
+
+def _normalize_station_name(name: str) -> str:
+    normalized = "".join(name.strip().split())
+    if normalized.endswith("역"):
+        normalized = normalized[:-1]
+    return normalized

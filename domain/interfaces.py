@@ -24,6 +24,21 @@ class StationRepository(ABC):
         ...
 
 
+    @abstractmethod
+    def find_nearest_candidates(
+        self,
+        location: Location,
+        limit: int,
+    ) -> list[Station]:
+        """Return nearest station candidates ordered by distance."""
+        ...
+
+    @abstractmethod
+    def find_by_name(self, name: str) -> Station | None:
+        """Return a station by user-facing name, or None when not found."""
+        ...
+
+
 class VectorRepository(ABC):
     @abstractmethod
     def search(
