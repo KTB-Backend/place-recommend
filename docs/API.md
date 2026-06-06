@@ -191,20 +191,9 @@ python scripts/ingest_to_vectordb.py
 
 Current local dataset status:
 
-- `data/processed/places.json`: 2,296 places
-- stations with zero local places: 49
-- use `--missing-only` after the Kakao quota resets
-
-Stations currently missing local place data:
-
-```text
-대청, 미아, 이촌, 영등포시장, 청구, 행당, 군자, 아차산, 광나루, 천호,
-강동, 망원, 상수, 이태원, 한강진, 녹사평, 보문, 안암, 고려대, 월곡,
-태릉입구, 뚝섬유원지, 청담, 강남구청, 학동, 논현, 반포, 내방, 남성,
-숭실대입구, 상도, 장승배기, 보라매, 신풍, 가산디지털단지, 흑석,
-구반포, 신반포, 사평, 신논현, 언주, 선정릉, 삼성중앙, 봉은사,
-한성백제, 올림픽공원, 디지털미디어시티, 종로3가, 종각
-```
+- `data/processed/places.json`: 3,916 places
+- stations with local places: 146
+- stations with zero local places: 0
 
 ## Error Responses
 

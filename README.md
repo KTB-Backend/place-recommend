@@ -80,9 +80,9 @@ python scripts/fetch_kakao_places.py --missing-only
 
 현재 로컬 데이터 기준:
 
-- 장소 데이터: 2,296개
-- 데이터가 없는 역: 49개
-- 토큰 쿼터가 리셋된 뒤 `--missing-only`로 재수집
+- 장소 데이터: 3,916개
+- 데이터가 있는 역: 146개
+- 데이터가 없는 역: 0개
 
 ### 4. 벡터 DB 적재
 
