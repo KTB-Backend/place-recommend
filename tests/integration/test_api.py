@@ -201,6 +201,7 @@ def test_recommend_happy_path(client: TestClient) -> None:
     assert resp.status_code == 200
     data = resp.json()
     assert data["status"] == "ok"
+    assert data["origin_locations"] == LOCATIONS_PAYLOAD
     assert data["station"]["id"] == SAMPLE_STATION.id
     assert len(data["recommendations"]) == 1
     assert data["recommendations"][0]["similarity_score"] == pytest.approx(0.87)
@@ -226,6 +227,7 @@ def test_recommend_returns_station_options_when_primary_empty(
     assert resp.status_code == 200
     data = resp.json()
     assert data["status"] == "station_selection_required"
+    assert data["origin_locations"] == LOCATIONS_PAYLOAD
     assert data["meeting_station"]["id"] == SAMPLE_STATION.id
     assert data["map_search"]["query"] == "강남 조용한 카페"
     assert data["map_search"]["url"].startswith("https://map.kakao.com/link/search/")

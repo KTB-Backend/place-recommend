@@ -8,6 +8,7 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from api.v1 import midpoint, recommend
+from core.config import get_settings
 from domain.exceptions import (
     NoNearbyStationError,
     NoRecommendationsError,
@@ -54,6 +55,12 @@ async def vector_db_error_handler(
 
 app.include_router(midpoint.router, prefix="/api/v1", tags=["midpoint"])
 app.include_router(recommend.router, prefix="/api/v1", tags=["recommend"])
+
+
+@app.get("/api/v1/client-config", include_in_schema=False)
+async def client_config() -> dict[str, str]:
+    settings = get_settings()
+    return {"kakao_javascript_key": settings.kakao_javascript_key}
 
 if FRONTEND_DIR.exists():
     app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")

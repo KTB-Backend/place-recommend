@@ -44,6 +44,7 @@ class MapSearchLink(BaseModel):
 
 class RecommendOkResponse(BaseModel):
     status: str = "ok"
+    origin_locations: list[LocationInput]
     meeting_station: Station
     station: Station
     recommendations: list[Recommendation]
@@ -51,6 +52,7 @@ class RecommendOkResponse(BaseModel):
 
 class RecommendSelectionResponse(BaseModel):
     status: str = "station_selection_required"
+    origin_locations: list[LocationInput]
     meeting_station: Station
     map_search: MapSearchLink
     options: list[StationRecommendationOption]

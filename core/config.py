@@ -14,6 +14,7 @@ class Settings(BaseSettings):
     station_search_radius_km: float = 5.0
     default_top_k: int = 3
     kakao_rest_api_key: str = ""
+    kakao_javascript_key: str = ""
     kakao_ssl_verify: bool = True
 
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")

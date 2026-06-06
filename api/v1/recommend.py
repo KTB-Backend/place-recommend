@@ -6,6 +6,7 @@ from fastapi import APIRouter, Depends, HTTPException
 
 from api.dependencies import get_recommendation_service
 from api.v1.schemas import (
+    LocationInput,
     MapSearchLink,
     RecommendOkResponse,
     RecommendRequest,
@@ -25,6 +26,10 @@ def _build_kakao_map_search_link(station_name: str, query: str) -> MapSearchLink
         query=search_query,
         url=f"https://map.kakao.com/link/search/{quote(search_query)}",
     )
+
+
+def _to_location_inputs(locations: list[Location]) -> list[LocationInput]:
+    return [LocationInput(lat=location.lat, lng=location.lng) for location in locations]
 
 
 @router.post(
@@ -53,11 +58,13 @@ async def recommend(
     if decision.status == "ok":
         assert decision.station is not None
         return RecommendOkResponse(
+            origin_locations=_to_location_inputs(locations),
             meeting_station=decision.meeting_station,
             station=decision.station,
             recommendations=decision.recommendations,
         )
     return RecommendSelectionResponse(
+        origin_locations=_to_location_inputs(locations),
         meeting_station=decision.meeting_station,
         map_search=_build_kakao_map_search_link(
             decision.meeting_station.name,
