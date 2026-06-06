@@ -4,11 +4,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>mid-meet</title>
-    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/styles.css?v=20260606-map-background" />
   </head>
   <body>
     <main class="app-shell">
-      <section class="workspace" aria-label="추천 요청">
+      <section class="map-panel" aria-label="Kakao Map">
+        <div id="kakao-map" class="kakao-map" role="img" aria-label="Kakao Map"></div>
+        <div id="map-fallback" class="map-fallback" hidden>
+          <strong>Kakao 지도 도메인 등록이 필요합니다</strong>
+          <p>
+            Kakao Developers의 Web 플랫폼에 http://localhost:8000 과
+            http://127.0.0.1:8000 을 등록하면 지도가 표시됩니다.
+          </p>
+        </div>
+      </section>
+
+      <section class="workspace overlay-panel" aria-label="추천 요청">
         <header class="topbar">
           <div>
             <p class="eyebrow">mid-meet</p>
@@ -19,100 +30,75 @@
           </a>
         </header>
 
-        <div class="layout">
-          <form id="recommend-form" class="request-panel">
-            <div class="field-row">
-              <label for="query">찾는 장소</label>
-              <input
-                id="query"
-                name="query"
-                type="text"
-                value="조용한 카페"
-                autocomplete="off"
-                required
-              />
-            </div>
+        <form id="recommend-form" class="request-panel">
+          <div class="field-row">
+            <label for="query">찾는 장소</label>
+            <input
+              id="query"
+              name="query"
+              type="text"
+              value="조용한 카페"
+              autocomplete="off"
+              required
+            />
+          </div>
 
-            <div class="field-row compact">
-              <label for="top-k">추천 개수</label>
-              <input id="top-k" name="top_k" type="number" min="1" max="20" value="3" />
-            </div>
+          <div class="field-row compact">
+            <label for="top-k">추천 개수</label>
+            <input id="top-k" name="top_k" type="number" min="1" max="20" value="3" />
+          </div>
 
-            <section class="locations-block" aria-label="출발역">
-              <div class="section-heading">
-                <h2>출발역</h2>
-                <button
-                  class="icon-button"
-                  id="add-location"
-                  type="button"
-                  aria-label="출발역 추가"
-                  title="출발역 추가"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true">
-                    <path d="M12 5v14M5 12h14" />
-                  </svg>
-                </button>
-              </div>
-              <div id="locations" class="locations-list"></div>
-            </section>
-
-            <div class="action-row">
-              <button id="submit-button" class="primary-button" type="submit">
+          <section class="locations-block" aria-label="출발역">
+            <div class="section-heading">
+              <h2>출발역</h2>
+              <button
+                class="icon-button"
+                id="add-location"
+                type="button"
+                aria-label="출발역 추가"
+                title="출발역 추가"
+              >
                 <svg viewBox="0 0 24 24" aria-hidden="true">
-                  <circle cx="11" cy="11" r="7" />
-                  <path d="m16 16 4 4" />
+                  <path d="M12 5v14M5 12h14" />
                 </svg>
-                추천 받기
-              </button>
-              <button id="sample-button" class="secondary-button" type="button">
-                예시 입력
               </button>
             </div>
-          </form>
-
-          <section class="map-panel" aria-label="중간 지점 시각화">
-            <svg class="map-visual" viewBox="0 0 720 520" role="img" aria-label="예시 이동 경로">
-              <defs>
-                <linearGradient id="river" x1="0" x2="1">
-                  <stop offset="0" stop-color="#d8f0ef" />
-                  <stop offset="1" stop-color="#c7e1f5" />
-                </linearGradient>
-              </defs>
-              <rect width="720" height="520" rx="0" fill="#f6f3ec" />
-              <path
-                d="M0 285 C120 235 190 330 310 285 S520 205 720 255 L720 340 C560 310 465 385 330 340 S140 285 0 350 Z"
-                fill="url(#river)"
-              />
-              <g class="grid-lines">
-                <path d="M90 0v520M210 0v520M330 0v520M450 0v520M570 0v520" />
-                <path d="M0 80h720M0 170h720M0 260h720M0 350h720M0 440h720" />
-              </g>
-              <path class="route-line" d="M155 155 C265 235 360 255 520 165" />
-              <path class="route-line alt" d="M175 390 C300 315 395 300 545 360" />
-              <g class="pin start">
-                <circle cx="155" cy="155" r="18" />
-                <path d="M155 111v44" />
-              </g>
-              <g class="pin start">
-                <circle cx="520" cy="165" r="18" />
-                <path d="M520 121v44" />
-              </g>
-              <g class="pin midpoint">
-                <circle cx="345" cy="255" r="24" />
-                <path d="M345 201v54" />
-              </g>
-              <g class="station-dot">
-                <circle cx="390" cy="315" r="10" />
-                <circle cx="450" cy="275" r="8" />
-                <circle cx="295" cy="335" r="8" />
-              </g>
-            </svg>
-            <div id="status-strip" class="status-strip">요청 대기 중</div>
+            <div id="locations" class="locations-list"></div>
           </section>
-        </div>
+
+          <div class="action-row">
+            <button id="submit-button" class="primary-button" type="submit">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="11" cy="11" r="7" />
+                <path d="m16 16 4 4" />
+              </svg>
+              추천 받기
+            </button>
+            <button id="sample-button" class="secondary-button" type="button">
+              예시 입력
+            </button>
+          </div>
+        </form>
       </section>
 
-      <aside class="result-panel" aria-label="추천 결과">
+      <aside class="result-panel overlay-panel" aria-label="추천 결과">
+        <div class="map-toolbar">
+          <div>
+            <p class="eyebrow">Kakao Map</p>
+            <h2 id="map-title">서울역 조용한 카페</h2>
+          </div>
+          <a
+            id="map-open-link"
+            class="map-open-link"
+            href="https://map.kakao.com/link/search/%EC%84%9C%EC%9A%B8%EC%97%AD%20%EC%A1%B0%EC%9A%A9%ED%95%9C%20%EC%B9%B4%ED%8E%98"
+            target="_blank"
+            rel="noreferrer"
+          >
+            지도에서 열기
+          </a>
+        </div>
+        <div id="status-strip" class="status-strip">요청 대기 중</div>
+
         <div class="result-header">
           <div>
             <p class="eyebrow">Result</p>
@@ -137,6 +123,6 @@
       </aside>
     </main>
 
-    <script src="/static/app.js" type="module"></script>
+    <script src="/static/app.js?v=20260606-map-background" type="module"></script>
   </body>
 </html>
