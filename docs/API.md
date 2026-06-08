@@ -73,6 +73,12 @@ Fields:
 - `top_k`: Number of recommendations per station, from 1 to 20.
 - `selected_station_id`: Optional. Use it after the user chooses a nearby station option.
 
+Recommendation filtering:
+
+- The vector DB search expands internally and then returns only places within 800m of the target station.
+- A place is also discarded if its actual nearest station is different from the target station.
+- `distance_from_station_m` is recalculated from the station coordinate and place coordinate before returning.
+
 ### Direct Success
 
 Returned when the midpoint station has local recommendations.
@@ -144,6 +150,13 @@ Client flow:
 2. Show nearby selectable station options.
 3. Show the Kakao Map link for the original midpoint station.
 4. If the user selects an option, call `/api/v1/recommend` again with `selected_station_id`.
+5. If the selected station result is shown, keep the previous option list so the user can go back and choose another nearby station.
+
+The frontend empty-state copy for a midpoint station without local recommendations is:
+
+```text
+아직 추천받은 위치가 없어요! 여러분의 방문을 공유해주세요!
+```
 
 Second request:
 
@@ -194,6 +207,33 @@ Current local dataset status:
 - `data/processed/places.json`: 3,916 places
 - stations with local places: 146
 - stations with zero local places: 0
+
+## Station Coordinate Audit
+
+Station coordinates are stored in:
+
+```text
+infrastructure/station/hardcoded_station_repository.py
+```
+
+Audit with Kakao Local API:
+
+```bash
+python scripts/update_station_coordinates_from_kakao.py --min-score 140 --min-delta-m 20 --radius-m 5000
+```
+
+Optional controls:
+
+- `--start-after-id`: resume after a station id.
+- `--max-stations`: stop after a limited number of stations.
+
+When Kakao returns `API limit has been exceeded`, the script stops immediately and writes the partial audit report to:
+
+```text
+station_coordinate_kakao_report.csv
+```
+
+The current station repository has been reconciled against Seoul Metro official 1-8 line coordinate data, Seoul Metro official line 9 phase 2-3 coordinate data, and Kakao station search results. Gyeongbokgung is set to `37.575844, 126.973576`; Jongno 3-ga is set to the representative station marker coordinate `37.570455, 126.992134`.
 
 ## Error Responses
 

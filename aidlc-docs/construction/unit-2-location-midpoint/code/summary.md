@@ -5,12 +5,13 @@
 ### 인프라 계층
 | 파일 | 설명 |
 |---|---|
-| `infrastructure/station/hardcoded_station_repository.py` | 서울 26개 역 실좌표 + Haversine 거리 계산 + `find_nearest` 구현 |
+| `infrastructure/station/hardcoded_station_repository.py` | 서울 146개 역 좌표 + Haversine 거리 계산 + `find_nearest` 구현. 서울교통공사 공개 좌표와 Kakao 역 검색 결과로 주요 좌표를 재검증함 |
+| `scripts/update_station_coordinates_from_kakao.py` | Kakao Local API 기반 역 좌표 점검 리포트 생성. API 제한 시 부분 리포트 저장, `--start-after-id`, `--max-stations` 지원 |
 
 ### 애플리케이션 계층
 | 파일 | 설명 |
 |---|---|
-| `application/midpoint_service.py` | 산술 평균 중간지점 계산 + 최근접 역 탐색 오케스트레이션 |
+| `application/midpoint_service.py` | 산술 평균 중간지점 계산 + 최근접 역 탐색 오케스트레이션 + 장소 좌표의 실제 최근접역 확인용 `find_nearest_station` 제공 |
 
 ### 도메인 계층 수정
 | 파일 | 변경 내용 |

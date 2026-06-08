@@ -20,6 +20,9 @@ class MidpointService:
         midpoint = self.calculate_midpoint(locations)
         return self._repository.find_nearest(midpoint)
 
+    def find_nearest_station(self, location: Location) -> Station:
+        return self._repository.find_nearest(location)
+
     def find_meeting_station_candidates(
         self,
         locations: list[Location],

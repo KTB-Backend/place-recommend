@@ -5,7 +5,7 @@
 ### 데이터
 | 파일 | 설명 |
 |---|---|
-| `data/processed/places.json` | 샘플 장소 10개 (강남·홍대·합정·이태원·잠실·신촌·건대·여의도) |
+| `data/processed/places.json` | Kakao Local API 기반 장소 데이터 3,916개. 146개 역 모두 로컬 추천 데이터 보유 |
 
 ### 인프라 계층
 | 파일 | 설명 |
@@ -16,7 +16,7 @@
 ### 애플리케이션 계층
 | 파일 | 설명 |
 |---|---|
-| `application/recommendation_service.py` | 중간지점 → 임베딩 → 벡터 검색 오케스트레이션 |
+| `application/recommendation_service.py` | 중간지점 → 임베딩 → 벡터 검색 오케스트레이션. 추천 장소는 역 기준 800m 이내이고 실제 최근접역이 같은 경우만 반환하며, 중간역에 결과가 없으면 가까운 후보역 옵션을 제공 |
 
 ### 스크립트
 | 파일 | 설명 |
@@ -26,7 +26,7 @@
 ### 테스트
 | 파일 | 설명 |
 |---|---|
-| `tests/unit/test_recommendation_service.py` | 단위 테스트 5개 (mock 기반, ML 의존성 없음) |
+| `tests/unit/test_recommendation_service.py` | 단위 테스트 11개 (mock 기반, ML 의존성 없음). 추천 거리 필터링, 실제 최근접역 검증, 후보역 선택 흐름 포함 |
 
 ## 완료 검증 명령어
 

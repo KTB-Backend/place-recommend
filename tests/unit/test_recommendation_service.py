@@ -39,10 +39,33 @@ def _recommendation(place: Place) -> Recommendation:
     return Recommendation(place=place, similarity_score=0.85)
 
 
+def _place_near_station(place: Place, station: Station) -> Place:
+    return place.model_copy(
+        update={
+            "station": station.name,
+            "lat": station.lat,
+            "lng": station.lng,
+            "distance_from_station_m": 0,
+        }
+    )
+
+
+def _nearest_station_side_effect(stations: list[Station]):
+    def find(location: Location) -> Station:
+        return min(
+            stations,
+            key=lambda station: (station.lat - location.lat) ** 2
+            + (station.lng - location.lng) ** 2,
+        )
+
+    return find
+
+
 @pytest.fixture
 def service(sample_station: Station, sample_place: Place) -> RecommendationService:
     mock_station_repo = MagicMock()
     mock_station_repo.find_nearest_candidates.return_value = [sample_station]
+    mock_station_repo.find_nearest.return_value = sample_station
 
     mock_embedder = MagicMock()
     mock_embedder.embed_query.return_value = [0.1] * 768
@@ -84,6 +107,7 @@ class TestRecommendationService:
     def test_recommend_no_results_raises(self, sample_station: Station) -> None:
         mock_station_repo = MagicMock()
         mock_station_repo.find_nearest_candidates.return_value = [sample_station]
+        mock_station_repo.find_nearest.return_value = sample_station
         mock_embedder = MagicMock()
         mock_embedder.embed_query.return_value = [0.1] * 768
         mock_vector_repo = MagicMock()
@@ -106,6 +130,97 @@ class TestRecommendationService:
         call_args = service._vector_repository.search.call_args
         assert call_args[0][1] == sample_station.name
 
+    def test_recommend_filters_places_far_from_current_station(
+        self,
+        sample_place: Place,
+    ) -> None:
+        stations = [
+            Station(
+                id="hangangjin",
+                name="한강진",
+                line="6호선",
+                lat=37.5396,
+                lng=127.0017,
+            ),
+            Station(
+                id="itaewon",
+                name="이태원",
+                line="6호선",
+                lat=37.5344,
+                lng=126.9942,
+            ),
+        ]
+        stale_hangangjin_place = sample_place.model_copy(
+            update={
+                "station": "한강진",
+                "lat": 37.53056721439249,
+                "lng": 126.9974035343988,
+                "distance_from_station_m": 74,
+            }
+        )
+        nearby_itaewon_place = sample_place.model_copy(
+            update={
+                "station": "이태원",
+                "lat": 37.5332674937114,
+                "lng": 126.996565074613,
+                "distance_from_station_m": 379,
+            }
+        )
+        mock_station_repo = MagicMock()
+        mock_station_repo.find_nearest_candidates.return_value = stations
+        mock_station_repo.find_nearest.side_effect = _nearest_station_side_effect(
+            stations
+        )
+        mock_embedder = MagicMock()
+        mock_embedder.embed_query.return_value = [0.1] * 768
+        mock_vector_repo = MagicMock()
+        mock_vector_repo.search.side_effect = [
+            [_recommendation(stale_hangangjin_place)],
+            [_recommendation(nearby_itaewon_place)],
+        ]
+
+        svc = RecommendationService(
+            midpoint_service=MidpointService(repository=mock_station_repo),
+            embedding_port=mock_embedder,
+            vector_repository=mock_vector_repo,
+        )
+
+        decision = svc.recommend([Location(lat=37.5, lng=127.0)], "cafe", top_k=3)
+
+        assert decision.status == "station_selection_required"
+        assert decision.meeting_station == stations[0]
+        assert [option.station.id for option in decision.options] == ["itaewon"]
+
+    def test_recommend_recalculates_station_distance(
+        self,
+        sample_place: Place,
+        sample_station: Station,
+    ) -> None:
+        place = sample_place.model_copy(
+            update={
+                "lat": sample_station.lat,
+                "lng": sample_station.lng,
+                "distance_from_station_m": 999,
+            }
+        )
+        mock_station_repo = MagicMock()
+        mock_station_repo.find_nearest_candidates.return_value = [sample_station]
+        mock_station_repo.find_nearest.return_value = sample_station
+        mock_embedder = MagicMock()
+        mock_embedder.embed_query.return_value = [0.1] * 768
+        mock_vector_repo = MagicMock()
+        mock_vector_repo.search.return_value = [_recommendation(place)]
+
+        svc = RecommendationService(
+            midpoint_service=MidpointService(repository=mock_station_repo),
+            embedding_port=mock_embedder,
+            vector_repository=mock_vector_repo,
+        )
+
+        decision = svc.recommend([Location(lat=37.5, lng=127.0)], "cafe", top_k=3)
+
+        assert decision.recommendations[0].place.distance_from_station_m == 0
+
     def test_recommend_returns_three_selectable_station_options(
         self,
         sample_place: Place,
@@ -119,15 +234,18 @@ class TestRecommendationService:
         ]
         mock_station_repo = MagicMock()
         mock_station_repo.find_nearest_candidates.return_value = stations
+        mock_station_repo.find_nearest.side_effect = _nearest_station_side_effect(
+            stations
+        )
         mock_embedder = MagicMock()
         mock_embedder.embed_query.return_value = [0.1] * 768
         mock_vector_repo = MagicMock()
         mock_vector_repo.search.side_effect = [
             [],
-            [_recommendation(sample_place)],
-            [_recommendation(sample_place)],
-            [_recommendation(sample_place)],
-            [_recommendation(sample_place)],
+            [_recommendation(_place_near_station(sample_place, stations[1]))],
+            [_recommendation(_place_near_station(sample_place, stations[2]))],
+            [_recommendation(_place_near_station(sample_place, stations[3]))],
+            [_recommendation(_place_near_station(sample_place, stations[4]))],
         ]
 
         svc = RecommendationService(
@@ -151,13 +269,16 @@ class TestRecommendationService:
         ]
         mock_station_repo = MagicMock()
         mock_station_repo.find_nearest_candidates.return_value = stations
+        mock_station_repo.find_nearest.side_effect = _nearest_station_side_effect(
+            stations
+        )
         mock_embedder = MagicMock()
         mock_embedder.embed_query.return_value = [0.1] * 768
         mock_vector_repo = MagicMock()
         mock_vector_repo.search.side_effect = [
             [],
             [],
-            [_recommendation(sample_place)],
+            [_recommendation(_place_near_station(sample_place, stations[2]))],
         ]
 
         svc = RecommendationService(
@@ -178,10 +299,15 @@ class TestRecommendationService:
         ]
         mock_station_repo = MagicMock()
         mock_station_repo.find_nearest_candidates.return_value = stations
+        mock_station_repo.find_nearest.side_effect = _nearest_station_side_effect(
+            stations
+        )
         mock_embedder = MagicMock()
         mock_embedder.embed_query.return_value = [0.1] * 768
         mock_vector_repo = MagicMock()
-        mock_vector_repo.search.return_value = [_recommendation(sample_place)]
+        mock_vector_repo.search.return_value = [
+            _recommendation(_place_near_station(sample_place, stations[1]))
+        ]
 
         svc = RecommendationService(
             midpoint_service=MidpointService(repository=mock_station_repo),

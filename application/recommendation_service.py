@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 from typing import Literal
 
 from application.midpoint_service import MidpointService
@@ -10,6 +11,8 @@ from domain.models import Location, Recommendation, Station
 
 DEFAULT_STATION_CANDIDATE_LIMIT = 8
 DEFAULT_STATION_OPTION_LIMIT = 3
+MAX_RECOMMENDATION_DISTANCE_M = 800
+SEARCH_EXPANSION_FACTOR = 5
 
 
 @dataclass(frozen=True)
@@ -54,9 +57,9 @@ class RecommendationService:
 
         if selected_station_id:
             station = self._find_station_by_id(stations, selected_station_id)
-            results = self._vector_repository.search(
+            results = self._search_near_station(
                 query_vector,
-                station.name,
+                station,
                 top_k,
             )
             if not results:
@@ -72,9 +75,9 @@ class RecommendationService:
                 options=[],
             )
 
-        primary_results = self._vector_repository.search(
+        primary_results = self._search_near_station(
             query_vector,
-            meeting_station.name,
+            meeting_station,
             top_k,
         )
         if primary_results:
@@ -114,7 +117,11 @@ class RecommendationService:
     ) -> list[StationRecommendationOption]:
         options: list[StationRecommendationOption] = []
         for station in stations:
-            results = self._vector_repository.search(query_vector, station.name, top_k)
+            results = self._search_near_station(
+                query_vector,
+                station,
+                top_k,
+            )
             if results:
                 options.append(
                     StationRecommendationOption(
@@ -138,5 +145,60 @@ class RecommendationService:
             f"Selected station '{station_id}' is not a nearby candidate."
         )
 
+    def _search_near_station(
+        self,
+        query_vector: list[float],
+        station: Station,
+        top_k: int,
+    ) -> list[Recommendation]:
+        raw_results = self._vector_repository.search(
+            query_vector,
+            station.name,
+            top_k * SEARCH_EXPANSION_FACTOR,
+        )
+
+        filtered: list[Recommendation] = []
+        for recommendation in raw_results:
+            distance_m = _distance_m(
+                station.lat,
+                station.lng,
+                recommendation.place.lat,
+                recommendation.place.lng,
+            )
+            if distance_m > MAX_RECOMMENDATION_DISTANCE_M:
+                continue
+            nearest_station = self._midpoint_service.find_nearest_station(
+                Location(
+                    lat=recommendation.place.lat,
+                    lng=recommendation.place.lng,
+                )
+            )
+            if nearest_station.id != station.id:
+                continue
+
+            place = recommendation.place.model_copy(
+                update={"distance_from_station_m": round(distance_m)}
+            )
+            filtered.append(
+                recommendation.model_copy(update={"place": place})
+            )
+            if len(filtered) == top_k:
+                break
+
+        return filtered
+
     def locations_from_station_names(self, station_names: list[str]) -> list[Location]:
         return self._midpoint_service.locations_from_station_names(station_names)
+
+
+def _distance_m(lat1: float, lng1: float, lat2: float, lng2: float) -> float:
+    radius_m = 6_371_000
+    dlat = math.radians(lat2 - lat1)
+    dlng = math.radians(lng2 - lng1)
+    a = (
+        math.sin(dlat / 2) ** 2
+        + math.cos(math.radians(lat1))
+        * math.cos(math.radians(lat2))
+        * math.sin(dlng / 2) ** 2
+    )
+    return radius_m * 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))

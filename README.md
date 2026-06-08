@@ -7,7 +7,9 @@
 - 출발역 이름 기반 중간역 계산
 - 좌표 기반 `/midpoint`, `/recommend` 요청도 하위 호환 지원
 - 추천 데이터가 있는 중간역이면 바로 장소 추천 반환
+- 추천 장소가 요청 역 기준 800m 이내이고 실제 최근접역도 같은 경우만 반환
 - 중간역 주변에 추천 데이터가 없으면 가까운 후보역 3개를 사용자에게 선택지로 반환
+- 후보역을 선택한 뒤에도 "다른 역 다시 보기"로 이전 후보 목록 복귀 지원
 - 후보역이 마음에 들지 않을 때 기존 중간역 기준 Kakao Map 검색 링크 제공
 - 정적 프론트엔드 제공: `http://localhost:8000/`
 
@@ -84,7 +86,23 @@ python scripts/fetch_kakao_places.py --missing-only
 - 데이터가 있는 역: 146개
 - 데이터가 없는 역: 0개
 
-### 4. 벡터 DB 적재
+### 4. 역 좌표 재검증
+
+역 마커와 중간역 계산은 `infrastructure/station/hardcoded_station_repository.py`의 좌표를 사용합니다. 좌표 점검은 Kakao Local API 기반 보조 스크립트와 서울교통공사 공개 데이터를 함께 사용합니다.
+
+```bash
+python scripts/update_station_coordinates_from_kakao.py --min-score 140 --min-delta-m 20 --radius-m 5000
+```
+
+Kakao API 제한이 발생하면 남은 호출을 중단하고 `station_coordinate_kakao_report.csv`에 부분 점검 결과를 저장합니다. 특정 지점부터 이어서 점검하거나 호출량을 제한할 수 있습니다.
+
+```bash
+python scripts/update_station_coordinates_from_kakao.py --start-after-id jongro3ga --max-stations 20
+```
+
+현재 역 저장소는 서울교통공사 1-8호선 역사 좌표 정보, 서울교통공사 9호선 2-3단계 역사 좌표 정보, Kakao 역 검색 결과를 기준으로 146개 역을 재검증했습니다. 공식 데이터에 여러 호선 좌표가 존재하는 환승역은 대표 마커가 자연스럽게 보이도록 조정했습니다. 예: 경복궁 `37.575844, 126.973576`, 종로3가 `37.570455, 126.992134`.
+
+### 5. 벡터 DB 적재
 
 ```bash
 python scripts/ingest_to_vectordb.py
@@ -92,7 +110,7 @@ python scripts/ingest_to_vectordb.py
 
 최초 실행 시 SBERT 모델 다운로드가 발생할 수 있습니다.
 
-### 5. 서버 실행
+### 6. 서버 실행
 
 ```bash
 uvicorn api.main:app --reload --port 8000

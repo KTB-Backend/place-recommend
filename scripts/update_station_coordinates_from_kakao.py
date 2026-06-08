@@ -227,12 +227,37 @@ def _replace_station_coordinates(
     return source
 
 
+def _write_report(rows: list[dict[str, str]]) -> None:
+    fieldnames = [
+        "status",
+        "id",
+        "name",
+        "line",
+        "old_lat",
+        "old_lng",
+        "new_lat",
+        "new_lng",
+        "delta_m",
+        "score",
+        "query",
+        "place_name",
+        "category_name",
+        "address_name",
+    ]
+    with REPORT_FILE.open("w", encoding="utf-8-sig", newline="") as report:
+        writer = csv.DictWriter(report, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--min-score", type=int, default=140)
     parser.add_argument("--min-delta-m", type=int, default=20)
     parser.add_argument("--radius-m", type=int, default=5000)
+    parser.add_argument("--start-after-id")
+    parser.add_argument("--max-stations", type=int)
     args = parser.parse_args()
 
     api_key = _load_env_value("KAKAO_REST_API_KEY")
@@ -241,18 +266,31 @@ def main() -> None:
 
     rows: list[dict[str, str]] = []
     updates: dict[str, tuple[float, float]] = {}
+    processed = 0
+    should_skip = bool(args.start_after_id)
     with httpx.Client(timeout=15.0) as client:
         for station in HardcodedStationRepository._STATIONS:
-            candidates = _search_candidates(
-                client,
-                api_key,
-                station.id,
-                station.name,
-                station.line,
-                station.lat,
-                station.lng,
-                args.radius_m,
-            )
+            if should_skip:
+                if station.id == args.start_after_id:
+                    should_skip = False
+                continue
+            if args.max_stations is not None and processed >= args.max_stations:
+                break
+            try:
+                candidates = _search_candidates(
+                    client,
+                    api_key,
+                    station.id,
+                    station.name,
+                    station.line,
+                    station.lat,
+                    station.lng,
+                    args.radius_m,
+                )
+            except KakaoApiLimitError:
+                _write_report(rows)
+                raise
+            processed += 1
             best = _best_candidate(candidates)
             if best is None:
                 rows.append(
@@ -291,26 +329,7 @@ def main() -> None:
                 },
             )
 
-    fieldnames = [
-        "status",
-        "id",
-        "name",
-        "line",
-        "old_lat",
-        "old_lng",
-        "new_lat",
-        "new_lng",
-        "delta_m",
-        "score",
-        "query",
-        "place_name",
-        "category_name",
-        "address_name",
-    ]
-    with REPORT_FILE.open("w", encoding="utf-8-sig", newline="") as report:
-        writer = csv.DictWriter(report, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(rows)
+    _write_report(rows)
 
     if args.apply and updates:
         source = STATION_FILE.read_text(encoding="utf-8")
